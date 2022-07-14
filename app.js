@@ -2,6 +2,7 @@ require('dotenv').config()
 const process = require('process')
 const express = require('express')
 const axios = require('axios')
+const cors = require('cors')
 const fs = require('fs')
 var bodyParser = require('body-parser')
 const { getApplicantDataByExternalId, createAccessToken, getApplicantStatusAndDocs } = require('./sumsub-functions')
@@ -9,6 +10,7 @@ const app = express()
 const port = process.env.PORT || 3000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(cors())
 
 //Routes
 app.get('/', (req, res) => { res.send('SumSub Backend!')} );
