@@ -11,9 +11,9 @@ const port = process.env.PORT || 3000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
+app.get('/', (req, res) => { res.send('SumSub Backend!')} );
 
 //Routes
-app.get('/', (req, res) => { res.send('SumSub Backend!')} );
 app.post('/get-applicant-data', routeGetApplicantData);
 app.post('/create-sumsub-access-token', routeCreateSumsubAccessToken);
 
@@ -53,7 +53,7 @@ async function routeCreateSumsubAccessToken(req, res){
   try {
     //Try to create applicant. If success, hold the applicantId;
     const res1 = await axios.request(createAccessToken(req.body.externalUserId))
-    return res.json(res1.data.token)    
+    return res.json({accessToken:res1.data.token})    
   } catch (error1) {
     console.log(req.body.externalUserId)
     return res.status(500).send({ error: 'Cannot create access token' })
