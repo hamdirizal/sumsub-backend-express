@@ -10,12 +10,14 @@ const app = express()
 const port = process.env.PORT || 3000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
+app.use('/_downloads', express.static('_downloads'))
 app.use(cors())
 app.get('/', (req, res) => { res.send('SumSub Backend!')} );
 
 //Routes
 app.post('/get-applicant-data', routeGetApplicantData);
 app.post('/create-sumsub-access-token', routeCreateSumsubAccessToken);
+
 
 
 
