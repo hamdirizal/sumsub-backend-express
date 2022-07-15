@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use('/'+DOWNLOAD_FOLDER_NAME, express.static(DOWNLOAD_FOLDER_NAME))
 app.use(cors())
-app.get('/', (req, res) => { res.send('SumSub Backend! 100')} );
+app.get('/', (req, res) => { res.send('SumSub Backend! 101')} );
 
 //Routes tobe used on production
 app.post('/sumsub-get-applicant-data', routeSumsubGetApplicantData);
@@ -21,6 +21,18 @@ app.post('/sumsub-create-access-token', routeSumsubCreateAccessToken);
 app.post('/sumsub-webhook-applicant-reviewed', routeSumsubWebhookApplicantReviewed);
 
 async function routeSumsubWebhookApplicantReviewed(req, res){
+  const timeNow = (new Date()).toJSON();
+  timeNow = timeNow.replace(/[-:.]/g,"");
+
+
+  //Create download folder if not exits
+  if(!fs.existsSync('./'+DOWNLOAD_FOLDER_NAME)){
+    fs.mkdirSync('./'+DOWNLOAD_FOLDER_NAME);
+  }
+
+  //Write payload body to a json file.
+  fs.writeFileSync('./'+DOWNLOAD_FOLDER_NAME+'/'+timeNow+'.json',JSON.stringify(req.body));
+  
   return res.json({ok:1})
 }
 
