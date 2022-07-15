@@ -16,29 +16,15 @@ app.use(cors())
 app.get('/', (req, res) => { res.send('SumSub Backend!')} );
 
 //Routes tobe used on production
-app.post('/get-applicant-data', routeGetApplicantData);
-app.post('/create-sumsub-access-token', routeCreateSumsubAccessToken);
+app.post('/sumsub-get-applicant-data', routeSumsubGetApplicantData);
+app.post('/sumsub-create-access-token', routeSumsubCreateAccessToken);
+app.post('/sumsub-webhook-applicant-reviewed', routeSumsubWebhookApplicantReviewed);
 
-
-//These routes are only for dev to store dynamically-created files
-app.get('/'+DOWNLOAD_FOLDER_NAME, routeListDownloadedFiles);
-
-
-
-
-
-async function routeListDownloadedFiles(req,res){
-  //Create download folder if not exits
-  if(!fs.existsSync('./'+DOWNLOAD_FOLDER_NAME)){
-    fs.mkdirSync('./'+DOWNLOAD_FOLDER_NAME);
-  }
-
-  const files = fs.readdirSync('./'+DOWNLOAD_FOLDER_NAME);
-  res.json(files)
+async function routeSumsubWebhookApplicantReviewed(req, res){
+  return res.status(200)
 }
 
-
-async function routeGetApplicantData(req, res){
+async function routeSumsubGetApplicantData(req, res){
   //Send error if externalUserId not provided
   if(!req || !req.body || !req.body.externalUserId) return res.status(500).send({ error: 'Please provide externalUserId' });
 
@@ -64,7 +50,7 @@ async function routeGetApplicantData(req, res){
 
 
 
-async function routeCreateSumsubAccessToken(req, res){
+async function routeSumsubCreateAccessToken(req, res){
   //Send error if externalUserId not provided
   if(!req || !req.body || !req.body.externalUserId) return res.status(500).send({ error: 'Please provide externalUserId' });
 
@@ -78,7 +64,18 @@ async function routeCreateSumsubAccessToken(req, res){
   }
 }
 
+//These routes are only for dev to store dynamically-created files
+app.get('/'+DOWNLOAD_FOLDER_NAME, routeListDownloadedFiles);
 
+async function routeListDownloadedFiles(req,res){
+  //Create download folder if not exits
+  if(!fs.existsSync('./'+DOWNLOAD_FOLDER_NAME)){
+    fs.mkdirSync('./'+DOWNLOAD_FOLDER_NAME);
+  }
+
+  const files = fs.readdirSync('./'+DOWNLOAD_FOLDER_NAME);
+  res.json(files)
+}
 
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}`) })
