@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use('/'+DOWNLOAD_FOLDER_NAME, express.static(DOWNLOAD_FOLDER_NAME))
 app.use(cors())
-app.get('/', (req, res) => { res.send('SumSub Backend!')} );
+app.get('/', (req, res) => { res.send('SumSub Backend! 100')} );
 
 //Routes tobe used on production
 app.post('/sumsub-get-applicant-data', routeSumsubGetApplicantData);
@@ -21,7 +21,7 @@ app.post('/sumsub-create-access-token', routeSumsubCreateAccessToken);
 app.post('/sumsub-webhook-applicant-reviewed', routeSumsubWebhookApplicantReviewed);
 
 async function routeSumsubWebhookApplicantReviewed(req, res){
-  return res.status(200)
+  return res.json({ok:1})
 }
 
 async function routeSumsubGetApplicantData(req, res){
