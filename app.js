@@ -21,9 +21,7 @@ app.post('/sumsub-create-access-token', routeSumsubCreateAccessToken);
 app.post('/sumsub-webhook-applicant-reviewed', routeSumsubWebhookApplicantReviewed);
 
 async function routeSumsubWebhookApplicantReviewed(req, res){
-  const timeNow = (new Date()).toJSON();
-  timeNow = timeNow.replace(/[-:.]/g,"");
-
+  const timeNow = ((new Date()).toJSON()).replace(/[-:.]/g,"");
 
   //Create download folder if not exits
   if(!fs.existsSync('./'+DOWNLOAD_FOLDER_NAME)){
