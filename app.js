@@ -8,18 +8,34 @@ var bodyParser = require('body-parser')
 const { getApplicantDataByExternalId, createAccessToken, getApplicantStatusAndDocs } = require('./sumsub-functions')
 const app = express()
 const port = process.env.PORT || 3000
+const DOWNLOAD_FOLDER_NAME = "_downloads"
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
-app.use('/_downloads', express.static('_downloads'))
+app.use('/'+DOWNLOAD_FOLDER_NAME, express.static(DOWNLOAD_FOLDER_NAME))
 app.use(cors())
 app.get('/', (req, res) => { res.send('SumSub Backend!')} );
 
-//Routes
+//Routes tobe used on production
 app.post('/get-applicant-data', routeGetApplicantData);
 app.post('/create-sumsub-access-token', routeCreateSumsubAccessToken);
 
 
+//These routes are only for dev to store dynamically-created files
+app.get('/'+DOWNLOAD_FOLDER_NAME, routeListDownloadedFiles);
 
+
+
+
+
+async function routeListDownloadedFiles(req,res){
+  //Create download folder if not exits
+  if(!fs.existsSync('./'+DOWNLOAD_FOLDER_NAME)){
+    fs.mkdirSync('./'+DOWNLOAD_FOLDER_NAME);
+  }
+
+  const files = fs.readdirSync('./'+DOWNLOAD_FOLDER_NAME);
+  res.json(files)
+}
 
 
 async function routeGetApplicantData(req, res){
