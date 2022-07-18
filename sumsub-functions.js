@@ -89,13 +89,37 @@ function getApplicantDataByExternalId(externalUserId){
 }
 
 
-
 /**
- * Getting the status and document of a particular applicant
+ * Getting applicant submission data
  * @param {*} applicantId SumSub applicant id
  */
-function getApplicantStatusAndDocs(applicantId){  
-  console.log("Getting aplicant status");
+ function getApplicantSubmissionData(applicantId){  
+    console.log("Getting aplicant submission data");
+  
+    var method = 'get';
+    var url = '/resources/applicants/'+applicantId+'/one';
+  
+    var headers = {
+      'Accept': 'application/json',
+      'X-App-Token': process.env.SUMSUB_APP_TOKEN
+    };
+  
+    config.method = method;
+    config.url = url;
+    config.headers = headers;
+    config.data = null
+  
+    return config;
+}
+
+
+
+/**
+ * Getting the review status of particular applicant
+ * @param {*} applicantId SumSub applicant id
+ */
+function getApplicantReviewStatus(applicantId){  
+  console.log("Getting aplicant review status");
   
     var method = 'get';
     var url = '/resources/applicants/'+applicantId+'/requiredIdDocsStatus';    
@@ -145,4 +169,4 @@ function getApplicantStatusAndDocs(applicantId){
 
 
 
-module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantStatusAndDocs}
+module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData}

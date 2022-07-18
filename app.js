@@ -5,7 +5,7 @@ const axios = require('axios')
 const cors = require('cors')
 const fs = require('fs')
 var bodyParser = require('body-parser')
-const { getApplicantDataByExternalId, createAccessToken, getApplicantStatusAndDocs } = require('./sumsub-functions')
+const { getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus } = require('./sumsub-functions')
 const app = express()
 const port = process.env.PORT || 3000
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -28,8 +28,25 @@ async function routeSumsubWebhookApplicantReviewed(req, res){
     fs.mkdirSync('./'+DOWNLOAD_FOLDER_NAME);
   }
 
+  if(!req || !req.body || !req.body.applicantId){
+    return res.status(500).send({ error: 'The payload does not have applicantId' })
+  }  
+
+  let dataObj = {...req.body}
+
+  //Fetch applicantData and insert to the data object
+  try{
+    const res2 = await axios.request(getApplicantReviewStatus(req.body.applicantId));
+    console.log(res2)
+    dataObj.applicantData = res2.data;
+  }
+  catch(error2){
+    console.log(error2)
+    return res.status(500).send({ error: 'Failed to get the status and documents' })  
+  }
+
   //Write payload body to a json file.
-  fs.writeFileSync('./'+DOWNLOAD_FOLDER_NAME+'/'+timeNow+'.json',JSON.stringify(req.body));
+  fs.writeFileSync('./'+DOWNLOAD_FOLDER_NAME+'/'+timeNow+'.json',JSON.stringify(dataObj));
   
   return res.json({ok:1})
 }
@@ -49,7 +66,7 @@ async function routeSumsubGetApplicantData(req, res){
 
   try{
     console.log('trying to get res2')
-    const res2 = await axios.request(getApplicantStatusAndDocs(applicantId));
+    const res2 = await axios.request(getApplicantReviewStatus(applicantId));
     return res.json(res2.data)
   }
   catch(error2){
@@ -58,18 +75,15 @@ async function routeSumsubGetApplicantData(req, res){
   }
 }
 
-
-
 async function routeSumsubCreateAccessToken(req, res){
   //Send error if externalUserId not provided
   if(!req || !req.body || !req.body.externalUserId) return res.status(500).send({ error: 'Please provide externalUserId' });
 
   try {
-    //Try to create applicant. If success, hold the applicantId;
+    //Creating the access token
     const res1 = await axios.request(createAccessToken(req.body.externalUserId))
     return res.json({accessToken:res1.data.token})    
   } catch (error1) {
-    console.log(req.body.externalUserId)
     return res.status(500).send({ error: 'Cannot create access token' })
   }
 }
