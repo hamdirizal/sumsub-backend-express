@@ -213,6 +213,42 @@ function transformDataForExternalServices(applicantData, applicantReviewStatusDa
   finalObj.postalCode = qtr?.sections?.companyInformation?.items?.postalCode?.value;
   finalObj.city = qtr?.sections?.companyInformation?.items?.city?.value;
 
+  //Directors data
+  finalObj.companyDirectors = []
+  const directorsFieldsCount = 10;
+  let directorsItems = qtr?.sections?.companyDirectors?.items;
+  if(directorsItems && typeof directorsItems === 'object' && directorsItems !== null){
+    for(let i=1;i<=directorsFieldsCount;i++){
+      let fullName = directorsItems['director'+i+'FullName']?.value
+      let email = directorsItems['director'+i+'Email']?.value;
+      let phoneNumber = directorsItems['director'+i+'PhoneNumber']?.value;
+      if(fullName || email || phoneNumber){
+        finalObj.companyDirectors.push({fullName, email, phoneNumber})
+      }      
+    }
+  }
+
+  //Beneficiaries data
+  finalObj.companyBeneficiaries = []
+  const beneficiariesFieldsCount = 10;
+  let beneficiariesItems = qtr?.sections?.companyBeneficiaries?.items;
+  if(beneficiariesItems && typeof beneficiariesItems === 'object' && beneficiariesItems !== null){
+    for(let i=1;i<=beneficiariesFieldsCount;i++){
+      let attachment = beneficiariesItems['beneficiary'+i+'GovId']?.value
+      let email = beneficiariesItems['beneficiary'+i+'Email']?.value;
+      let fullName = beneficiariesItems['beneficiary'+i+'FullName']?.value;
+      let birthday = beneficiariesItems['beneficiary'+i+'DOB']?.value;
+      let percentageOwned = beneficiariesItems['beneficiary'+i+'Percent']?.value;
+      let ssn = beneficiariesItems['beneficiary'+i+'SSN']?.value;
+
+
+      if(attachment || email || fullName || birthday || percentageOwned || ssn){
+        finalObj.companyBeneficiaries.push({attachment, email, fullName, birthday, percentageOwned, ssn})
+      }      
+    }
+  }
+
+  // finalObj.contactBeneficiaries = qtr?.sections?.companyInformation?.items?.postalCode?.value;
 
   return finalObj;
 }
