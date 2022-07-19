@@ -178,6 +178,7 @@ function transformDataForExternalServices(applicantData, applicantReviewStatusDa
 
   finalObj.sumsubId = applicantData?.id;
   finalObj.externalId = applicantData?.externalUserId;
+  finalObj.inspectionId = applicantData?.inspectionId;
   finalObj.email = applicantData?.email;
   finalObj.phone = applicantData?.phone;
   finalObj.birthday = applicantData?.info?.dob;
@@ -240,15 +241,19 @@ function transformDataForExternalServices(applicantData, applicantReviewStatusDa
       let birthday = beneficiariesItems['beneficiary'+i+'DOB']?.value;
       let percentageOwned = beneficiariesItems['beneficiary'+i+'Percent']?.value;
       let ssn = beneficiariesItems['beneficiary'+i+'SSN']?.value;
-
-
       if(attachment || email || fullName || birthday || percentageOwned || ssn){
         finalObj.companyBeneficiaries.push({attachment, email, fullName, birthday, percentageOwned, ssn})
       }      
     }
   }
 
-  // finalObj.contactBeneficiaries = qtr?.sections?.companyInformation?.items?.postalCode?.value;
+  //Required documents
+  finalObj.proofAddressCompany = qtr?.sections?.requiredDocuments?.items?.proofAddressCompany?.value;
+  finalObj.incorporationCertificate = qtr?.sections?.requiredDocuments?.items?.incorporationCertificate?.value;
+  finalObj.certifiedIdentityDirectors = qtr?.sections?.requiredDocuments?.items?.certifiedIdentityDirectors?.value;
+  finalObj.articlesAssociationCopy = qtr?.sections?.requiredDocuments?.items?.articlesAssociationCopy?.value;
+  finalObj.boardApprovedListAuthUsers = qtr?.sections?.requiredDocuments?.items?.boardApprovedListAuthUsers?.value;
+  finalObj.certifiedResidencyDirectors = qtr?.sections?.requiredDocuments?.items?.certifiedResidencyDirectors?.value;
 
   return finalObj;
 }
