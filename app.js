@@ -5,9 +5,9 @@ const axios = require('axios')
 const cors = require('cors')
 const fs = require('fs')
 var bodyParser = require('body-parser')
-const { getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus } = require('./sumsub-functions')
+const { getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData } = require('./sumsub-functions')
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
@@ -34,15 +34,24 @@ async function routeSumsubWebhookApplicantReviewed(req, res){
 
   let dataObj = {...req.body}
 
-  //Fetch applicantData and insert to the data object
+
+  //Fetch applicant review status
   try{
     const res2 = await axios.request(getApplicantReviewStatus(req.body.applicantId));
-    console.log(res2)
-    dataObj.applicantData = res2.data;
+    dataObj.applicantReviewStatus = res2.data;
   }
   catch(error2){
-    console.log(error2)
-    return res.status(500).send({ error: 'Failed to get the status and documents' })  
+    return res.status(500).send({ error: error2 })  
+  }
+
+
+  //Fetch applicant submission data and insert to the data object
+  try{
+    const res3 = await axios.request(getApplicantSubmissionData(req.body.applicantId));
+    dataObj.applicantData = res3.data;
+  }
+  catch(error3){
+    return res.status(500).send({ error: error3 })  
   }
 
   //Write payload body to a json file.
