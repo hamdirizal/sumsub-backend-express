@@ -196,6 +196,22 @@ function transformDataForExternalServices(applicantData, applicantReviewStatusDa
   finalObj.check3_AcceptToc = qtr?.sections?.requiredDocuments?.items?.chkAcceptToc?.value;
   finalObj.check4_ImportantInformation = qtr?.sections?.requiredDocuments?.items?.chkImportantInformation?.value;
   finalObj.check5_FullName = qtr?.sections?.requiredDocuments?.items?.chkCorrectInfo?.value;
+  
+  finalObj.isAuthorizedSigner = qtr?.sections?.extra?.items?.isAuthorizedSigner?.value;
+  finalObj.entityLegalname = qtr?.sections?.companyInformation?.items?.legalNameOfEntity?.value;
+  finalObj.dba = qtr?.sections?.companyInformation?.items?.doingBusinessAs?.value;
+  finalObj.websiteAddress = qtr?.sections?.companyInformation?.items?.websiteAddress?.value;
+  finalObj.entityFirmType = qtr?.sections?.companyInformation?.items?.entitysFirmType?.value;
+  finalObj.description = qtr?.sections?.companyInformation?.items?.description?.value;
+  finalObj.incorporationCountry = qtr?.sections?.companyInformation?.items?.countryOfIncorporation?.value;
+  finalObj.incorporationState = qtr?.sections?.companyInformation?.items?.stateOfIncorporation?.value;
+  finalObj.registeredAddress = qtr?.sections?.companyInformation?.items?.registeredAddress?.value;
+  finalObj.physicalLocationAddress = qtr?.sections?.companyInformation?.items?.physicalLocationAddress?.value;
+  finalObj.jurisdictionTaxResidency = qtr?.sections?.companyInformation?.items?.jurisdictionOfTaxResidency?.value;
+  finalObj.taxIdentification = qtr?.sections?.companyInformation?.items?.taxIdentificationNumber?.value;
+  finalObj.entityAuthority = qtr?.sections?.companyInformation?.items?.entityAuthority?.value;
+  finalObj.postalCode = qtr?.sections?.companyInformation?.items?.postalCode?.value;
+  finalObj.city = qtr?.sections?.companyInformation?.items?.city?.value;
 
 
   return finalObj;

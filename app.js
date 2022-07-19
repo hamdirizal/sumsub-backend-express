@@ -54,6 +54,9 @@ async function routeSumsubWebhookApplicantReviewed(req, res){
     return res.status(500).send({ error: error3 })  
   }
 
+  let testObj = transformDataForExternalServices(dataObj.applicantData, dataObj.applicantReviewStatus)
+  console.log(testObj)
+
   //Write payload body to a json file.
   fs.writeFileSync('./'+DOWNLOAD_FOLDER_NAME+'/'+timeNow+'.json',JSON.stringify(dataObj));
   
