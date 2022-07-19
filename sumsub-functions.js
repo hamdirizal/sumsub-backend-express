@@ -167,6 +167,19 @@ function getApplicantReviewStatus(applicantId){
 }
 
 
+/**
+ * Transform raw data from Sumsub to a simpler version so we can feed it to external services.
+ * @param {*} applicantData The applicant data returned by Sumsub
+ * @param {*} applicantReviewStatusData The reviewStatus data returned by Sumsub to get only correct documents
+ * @returns 
+ */
+function transformDataForExternalServices(applicantData, applicantReviewStatusData){
 
 
-module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData}
+  return {}
+}
+
+
+
+
+module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData, transformDataForExternalServices}
