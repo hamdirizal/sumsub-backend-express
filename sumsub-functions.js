@@ -174,9 +174,31 @@ function getApplicantReviewStatus(applicantId){
  * @returns 
  */
 function transformDataForExternalServices(applicantData, applicantReviewStatusData){
+  let finalObj = {}
+
+  finalObj.sumsubId = applicantData?.id;
+  finalObj.externalId = applicantData?.externalUserId;
+  finalObj.email = applicantData?.email;
+  finalObj.phone = applicantData?.phone;
+  finalObj.birthday = applicantData?.info?.dob;
+  finalObj.firstName = applicantData?.info?.firstName;
+  finalObj.lastName = applicantData?.info?.lastName;
+  finalObj.middleName = applicantData?.info?.middleName;
+  finalObj.fullName = ([finalObj.firstName, finalObj.middleName, finalObj.lastName].join(' ')).replace(/  +/g,' ');
+
+  //If exists, hold questionnaire-object in this variable, otherwise just hold empty object.
+  let qtr = (applicantData.questionnaires && Array.isArray(applicantData.questionnaires) && applicantData.questionnaires[0]) ? applicantData.questionnaires[0] : {};
+  
+  finalObj.referer = qtr?.sections?.extra?.items?.referrer?.value;
+  finalObj.pointOfContact = qtr?.sections?.extra?.items?.poplarPointOfContact?.value;
+  finalObj.check1_CompanyNotInSanctionedCountries = qtr?.sections?.requiredDocuments?.items?.chkCompanyNotInSanctionedCountries?.value;
+  finalObj.check2_CompanyNotAsShellBank = qtr?.sections?.requiredDocuments?.items?.chkCompanyNotAsShellBank?.value;
+  finalObj.check3_AcceptToc = qtr?.sections?.requiredDocuments?.items?.chkAcceptToc?.value;
+  finalObj.check4_ImportantInformation = qtr?.sections?.requiredDocuments?.items?.chkImportantInformation?.value;
+  finalObj.check5_FullName = qtr?.sections?.requiredDocuments?.items?.chkCorrectInfo?.value;
 
 
-  return {}
+  return finalObj;
 }
 
 

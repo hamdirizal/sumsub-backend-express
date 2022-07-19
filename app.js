@@ -5,9 +5,9 @@ const axios = require('axios')
 const cors = require('cors')
 const fs = require('fs')
 var bodyParser = require('body-parser')
-const { getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData } = require('./sumsub-functions')
+const { transformDataForExternalServices, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData } = require('./sumsub-functions')
 const app = express()
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 const DOWNLOAD_FOLDER_NAME = "_downloads"
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
@@ -96,6 +96,15 @@ async function routeSumsubCreateAccessToken(req, res){
     return res.status(500).send({ error: 'Cannot create access token' })
   }
 }
+
+
+
+
+
+
+
+
+
 
 //These routes are only for dev to store dynamically-created files
 app.get('/'+DOWNLOAD_FOLDER_NAME, routeListDownloadedFiles);
