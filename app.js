@@ -60,8 +60,11 @@ async function routeSumsubWebhookApplicantReviewed(req, res){
     }
 
     let cleanedObj = transformDataForExternalServices(dataObj.applicantData, dataObj.applicantReviewStatus)
-    //TODO: Remove this on production
-    writeObjectToJsonFile(cleanedObj);  
+    
+    writeObjectToJsonFile(cleanedObj); //TODO: For logging. Remove this line on production
+
+    //TODO: Forward the cleaned data to primetrust
+
   }
 
   //Else if review status is not GREEN. Notify user.
