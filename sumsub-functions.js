@@ -248,17 +248,33 @@ function transformDataForExternalServices(applicantData, applicantReviewStatusDa
   }
 
   //Required documents
-  finalObj.proofAddressCompany = qtr?.sections?.requiredDocuments?.items?.proofAddressCompany?.value;
-  finalObj.incorporationCertificate = qtr?.sections?.requiredDocuments?.items?.incorporationCertificate?.value;
-  finalObj.certifiedIdentityDirectors = qtr?.sections?.requiredDocuments?.items?.certifiedIdentityDirectors?.value;
-  finalObj.articlesAssociationCopy = qtr?.sections?.requiredDocuments?.items?.articlesAssociationCopy?.value;
-  finalObj.boardApprovedListAuthUsers = qtr?.sections?.requiredDocuments?.items?.boardApprovedListAuthUsers?.value;
-  finalObj.certifiedResidencyDirectors = qtr?.sections?.requiredDocuments?.items?.certifiedResidencyDirectors?.value;
+  finalObj.proofAddressCompany_docId = qtr?.sections?.requiredDocuments?.items?.proofAddressCompany?.value;
+  finalObj.incorporationCertificate_docId = qtr?.sections?.requiredDocuments?.items?.incorporationCertificate?.value;
+  finalObj.certifiedIdentityDirectors_docId = qtr?.sections?.requiredDocuments?.items?.certifiedIdentityDirectors?.value;
+  finalObj.articlesAssociationCopy_docId = qtr?.sections?.requiredDocuments?.items?.articlesAssociationCopy?.value;
+  finalObj.boardApprovedListAuthUsers_docId = qtr?.sections?.requiredDocuments?.items?.boardApprovedListAuthUsers?.value;
+  finalObj.certifiedResidencyDirectors_docId = qtr?.sections?.requiredDocuments?.items?.certifiedResidencyDirectors?.value;
 
   return finalObj;
 }
 
 
+ function getDocument(inspectionId, resourceId){  
+  var method = 'get';
+  var url = `/resources/inspections/${inspectionId}/resources/${resourceId}`;
+
+  var headers = {
+    'Accept': 'application/json',
+    'X-App-Token': process.env.SUMSUB_APP_TOKEN
+  };
+
+  config.method = method;
+  config.url = url;
+  config.headers = headers;
+  config.data = null
+
+  return config;
+}
 
 
-module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData, transformDataForExternalServices}
+module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData, transformDataForExternalServices, getDocument}
