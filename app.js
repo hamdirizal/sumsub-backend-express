@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use('/'+DOWNLOAD_FOLDER_NAME, express.static(DOWNLOAD_FOLDER_NAME))
 app.use(cors())
-app.get('/', (req, res) => { res.send('SumSub Backend! 103')} );
+app.get('/', (req, res) => { res.send('SumSub Backend! 104')} );
 
 
 //Routes tobe used on production
@@ -30,74 +30,48 @@ app.post('/sumsub-webhook-applicant-reviewed', routeSumsubWebhookApplicantReview
 
 
 async function routeSumsubWebhookApplicantReviewed(req, res){
-  const timeNow = ((new Date()).toJSON()).replace(/[-:.]/g,"");
+  
 
-  //Create download folder if not exits
-  if(!fs.existsSync('./'+DOWNLOAD_FOLDER_NAME)){
-    fs.mkdirSync('./'+DOWNLOAD_FOLDER_NAME);
-  }
-
+  //If applicant id is not found, return 500 error code.
   if(!req || !req.body || !req.body.applicantId){
     return res.status(500).send({ error: 'The payload does not have applicantId' })
-  }  
-
-  let dataObj = {...req.body}
-
-
-  //Fetch applicant review status
-  try{
-    const res2 = await axios.request(getApplicantReviewStatus(req.body.applicantId));
-    dataObj.applicantReviewStatus = res2.data;
-  }
-  catch(error2){
-    return res.status(500).send({ error: error2 })  
   }
 
+  //If the review status is GREEN, do next step.
+  if(req?.body?.reviewResult?.reviewAnswer === "GREEN" ){
+    let dataObj = {...req.body}
 
-  //Fetch applicant submission data and insert to the data object
-  try{
-    const res3 = await axios.request(getApplicantSubmissionData(req.body.applicantId));
-    dataObj.applicantData = res3.data;
+    //Fetch applicant review status
+    try{
+      const res2 = await axios.request(getApplicantReviewStatus(req.body.applicantId));
+      dataObj.applicantReviewStatus = res2.data;
+    }
+    catch(error2){
+      return res.status(500).send({ error: error2 })  
+    }
+
+    //Fetch applicant submission data and insert to the data object
+    try{
+      const res3 = await axios.request(getApplicantSubmissionData(req.body.applicantId));
+      dataObj.applicantData = res3.data;
+    }
+    catch(error3){
+      return res.status(500).send({ error: error3 })  
+    }
+
+    let cleanedObj = transformDataForExternalServices(dataObj.applicantData, dataObj.applicantReviewStatus)
+    //TODO: Remove this on production
+    writeObjectToJsonFile(cleanedObj);  
   }
-  catch(error3){
-    return res.status(500).send({ error: error3 })  
+
+  //Else if review status is not GREEN. Notify user.
+  else{
+    //TODO: Send notification to the user, asking them to re-do the verification.
   }
 
-  let testObj = transformDataForExternalServices(dataObj.applicantData, dataObj.applicantReviewStatus)
-  console.log(testObj)
-  // console.log(dataObj)
 
-  //Write payload body to a json file.
-  fs.writeFileSync('./'+DOWNLOAD_FOLDER_NAME+'/'+timeNow+'.json',JSON.stringify(dataObj));
-  
   return res.json({ok:1})
 }
-
-async function routeSumsubGetApplicantData(req, res){
-  //Send error if externalUserId not provided
-  if(!req || !req.body || !req.body.externalUserId) return res.status(500).send({ error: 'Please provide externalUserId' });
-
-  let applicantId = null;
-
-  try {
-    const res1 = await axios.request(getApplicantDataByExternalId(req.body.externalUserId))
-    applicantId = res1.data.id;
-  } catch (error1) {
-    return res.status(500).send({ error: 'Cannot find applicant with this external-id' })  
-  }
-
-  try{
-    console.log('trying to get res2')
-    const res2 = await axios.request(getApplicantReviewStatus(applicantId));
-    return res.json(res2.data)
-  }
-  catch(error2){
-    console.log(error2)
-    return res.status(500).send({ error: 'Failed to get the status and documents' })  
-  }
-}
-
-
 
 
 async function routeSumsubCreateAccessToken(req, res){
@@ -115,13 +89,17 @@ async function routeSumsubCreateAccessToken(req, res){
 
 
 
-
-
-
-
-
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //These routes are only for dev to store dynamically-created files
 
 // app.post('/sumsub-get-applicant-data', routeSumsubGetApplicantData);
@@ -137,7 +115,16 @@ async function routeListDownloadedFiles(req,res){
   res.json(files)
 }
 
+async function writeObjectToJsonFile(obj){    
+  const timeNow = ((new Date()).toJSON()).replace(/[-:.]/g,"");
+  //Create download folder if not exits
+  if(!fs.existsSync('./'+DOWNLOAD_FOLDER_NAME)){
+    fs.mkdirSync('./'+DOWNLOAD_FOLDER_NAME);
+  }
+  //Write payload body to a json file.
+  fs.writeFileSync('./'+DOWNLOAD_FOLDER_NAME+'/'+timeNow+'.json',JSON.stringify(obj));
 
+}
 
 app.get('/get-document', async function(req, res){
   try {
@@ -150,5 +137,7 @@ app.get('/get-document', async function(req, res){
 });
 
 
+
+
 //Start the server
-app.listen(port, () => { console.log(`Sumsub backend app listening on port ${port}`) })
+app.listen(port, () => { console.info(`Sumsub backend app listening on port ${port}`) })
