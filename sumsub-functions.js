@@ -238,11 +238,21 @@ function transformDataForExternalServices(applicantData, applicantReviewStatusDa
       let attachment = beneficiariesItems['beneficiary'+i+'GovId']?.value
       let email = beneficiariesItems['beneficiary'+i+'Email']?.value;
       let fullName = beneficiariesItems['beneficiary'+i+'FullName']?.value;
+      try {
+        fullName = fullName.replace(/ {2,}/g,' ');
+      } catch (error) {}
+      let firstName;
+      let lastName;
+      try {
+        let nameArr = fullName.split(' ');
+        firstName = nameArr[0];
+        lastName = nameArr[nameArr.length-1]
+      } catch (error) {}
       let birthday = beneficiariesItems['beneficiary'+i+'DOB']?.value;
       let percentageOwned = beneficiariesItems['beneficiary'+i+'Percent']?.value;
       let ssn = beneficiariesItems['beneficiary'+i+'SSN']?.value;
-      if(attachment || email || fullName || birthday || percentageOwned || ssn){
-        finalObj.companyBeneficiaries.push({attachment, email, fullName, birthday, percentageOwned, ssn})
+      if(attachment || email || firstName || lastName || birthday || percentageOwned || ssn){
+        finalObj.companyBeneficiaries.push({attachment, email, firstName, lastName, birthday, percentageOwned, ssn})
       }      
     }
   }
