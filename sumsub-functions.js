@@ -173,7 +173,7 @@ function getApplicantReviewStatus(applicantId){
  * @param {*} applicantReviewStatusData The reviewStatus data returned by Sumsub to get only correct documents
  * @returns 
  */
-function transformDataForExternalServices(applicantData, applicantReviewStatusData){
+function transformDataForExternalServices(applicantData){
   let finalObj = {}
 
   finalObj.sumsubId = applicantData?.id;
