@@ -1,2 +1,13 @@
 ### Test the api
 GET http://localhost:3001/
+
+### Sumsub webhook
+POST http://localhost:3001/sumsub-webhook-applicant-reviewed
+Content-Type: application/json
+
+{
+  "applicantId":"62d00fcea133380001adfc01",
+  "reviewResult":{
+    "reviewAnswer":"GREEN"
+    }
+}
