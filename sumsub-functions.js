@@ -211,7 +211,7 @@ function transformDataForExternalServices(applicantData){
   finalObj.websiteAddress = qtr?.sections?.companyInformation?.items?.websiteAddress?.value;
   finalObj.entityFirmType = qtr?.sections?.companyInformation?.items?.entitysFirmType?.value;
   finalObj.description = qtr?.sections?.companyInformation?.items?.description?.value;
-  finalObj.incorporationCountry = qtr?.sections?.companyInformation?.items?.countryOfIncorporation?.value;
+  finalObj.incorporationCountry = alpha3toAlpha2(qtr?.sections?.companyInformation?.items?.countryOfIncorporation?.value);
   finalObj.incorporationState = qtr?.sections?.companyInformation?.items?.stateOfIncorporation?.value;
   finalObj.registeredAddress = qtr?.sections?.companyInformation?.items?.registeredAddress?.value;
   finalObj.physicalLocationAddress = qtr?.sections?.companyInformation?.items?.physicalLocationAddress?.value;
