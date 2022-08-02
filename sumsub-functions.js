@@ -190,7 +190,7 @@ function transformDataForExternalServices(applicantData, applicantReviewStatusDa
   //If exists, hold questionnaire-object in this variable, otherwise just hold empty object.
   let qtr = (applicantData.questionnaires && Array.isArray(applicantData.questionnaires) && applicantData.questionnaires[0]) ? applicantData.questionnaires[0] : {};
   
-  finalObj.referer = qtr?.sections?.extra?.items?.referrer?.value;
+  finalObj.referrer = qtr?.sections?.extra?.items?.referrer?.value;
   finalObj.pointOfContact = qtr?.sections?.extra?.items?.poplarPointOfContact?.value;
   finalObj.check1_CompanyNotInSanctionedCountries = qtr?.sections?.requiredDocuments?.items?.chkCompanyNotInSanctionedCountries?.value;
   finalObj.check2_CompanyNotAsShellBank = qtr?.sections?.requiredDocuments?.items?.chkCompanyNotAsShellBank?.value;
