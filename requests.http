@@ -1,0 +1,2 @@
+### Test the api
+GET http://localhost:3001/
