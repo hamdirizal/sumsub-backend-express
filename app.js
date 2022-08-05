@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use('/'+DOWNLOAD_FOLDER_NAME, express.static(DOWNLOAD_FOLDER_NAME))
 app.use(cors())
-app.get('/', (req, res) => { res.send('SumSub Backend! 104')} );
+app.get('/', (req, res) => { res.send('SumSub Backend! 105')} );
 
 
 //Routes tobe used on production
@@ -86,7 +86,7 @@ async function routeSumsubCreateAccessToken(req, res){
     const res1 = await axios.request(createAccessToken(req.body.externalUserId))
     return res.json({accessToken:res1.data.token})    
   } catch (error1) {
-    return res.status(500).send({ error: 'Cannot create access token' })
+    return res.status(500).send({ error: error1 })
   }
 }
 
