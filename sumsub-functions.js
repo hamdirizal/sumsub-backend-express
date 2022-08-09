@@ -258,8 +258,8 @@ function transformDataForExternalServices(applicantData){
       let birthday = beneficiariesItems['beneficiary'+i+'DOB']?.value;
       let percentageOwned = beneficiariesItems['beneficiary'+i+'Percent']?.value;
       let ssn = beneficiariesItems['beneficiary'+i+'SSN']?.value;
-      if(attachment || email || firstName || lastName || birthday || percentageOwned || ssn){
-        finalObj.companyBeneficiaries.push({attachment, email, firstName, lastName, birthday, percentageOwned, ssn})
+      if(i || attachment || email || firstName || lastName || birthday || percentageOwned || ssn){
+        finalObj.companyBeneficiaries.push({index:i, attachment, email, firstName, lastName, birthday, percentageOwned, ssn})
       }      
     }
   }
