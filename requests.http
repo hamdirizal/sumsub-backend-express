@@ -11,3 +11,15 @@ Content-Type: application/json
     "reviewAnswer":"GREEN"
     }
 }
+
+
+### Hamdi Test webhook
+POST https://hamdirizal.com/poplarsumsubwebhooktest/index.php
+Content-Type: application/json
+
+{
+  "applicantId":"62d00fcea133380001adfc01",
+  "reviewResult":{
+    "reviewAnswer":"GREEN"
+    }
+}

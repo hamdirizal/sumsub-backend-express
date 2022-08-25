@@ -170,7 +170,7 @@ app.all('/account', (req,res)=>{
 
 app.all('/account/setup-state', (req,res)=>{
   // let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":0,"connect_accounts":true,"details":[]}
-  let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":0,"details":[],"connect_accounts":true}
+  let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":1,"details":[],"connect_accounts":true}
   return res.json(obj);
 });
 
@@ -194,7 +194,7 @@ app.all('/account/idle-cash', (req,res)=>{
 });
 
 app.post('/account/deposits', (req,res)=>{
-  let obj = {success:true, message:"Mock data. The deposit is created."}
+  let obj = {success:true, message:"Mock data: The deposit is created."}
   return res.json(obj);
 });
 app.all('/account/deposits/ach-push-details', (req,res)=>{
@@ -205,8 +205,14 @@ app.all('/account/deposits/wire-details', (req,res)=>{
   let obj = {foo:'bar'}
   return res.json(obj);
 });
+
 app.all('/account/deposits/fee', (req,res)=>{
   let obj = {fee:'1.99'}
+  return res.json(obj);
+});
+
+app.all('/account/deposits/automat', (req,res)=>{
+  let obj = { success: true, message: 'Mock data: The automated deposit is created' };
   return res.json(obj);
 });
 
