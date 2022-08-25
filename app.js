@@ -193,6 +193,23 @@ app.all('/account/idle-cash', (req,res)=>{
   return res.json(obj);
 });
 
+app.post('/account/deposits', (req,res)=>{
+  let obj = {success:true, message:"Mock data. The deposit is created."}
+  return res.json(obj);
+});
+app.all('/account/deposits/ach-push-details', (req,res)=>{
+  let obj = {foo:'bar'}
+  return res.json(obj);
+});
+app.all('/account/deposits/wire-details', (req,res)=>{
+  let obj = {foo:'bar'}
+  return res.json(obj);
+});
+app.all('/account/deposits/fee', (req,res)=>{
+  let obj = {fee:'1.99'}
+  return res.json(obj);
+});
+
 
 
 
