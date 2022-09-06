@@ -170,7 +170,7 @@ app.all('/account', (req,res)=>{
 
 app.all('/account/setup-state', (req,res)=>{
   // let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":0,"connect_accounts":true,"details":[]}
-  let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":1,"details":[],"connect_accounts":true}
+  let obj = {"business_verification":"NONE","submit_documentation":0,"deposit_status":0,"details":[],"connect_accounts":false}
   return res.json(obj);
 });
 
@@ -207,7 +207,7 @@ app.all('/account/deposits/wire-details', (req,res)=>{
 });
 
 app.all('/account/deposits/fee', (req,res)=>{
-  let obj = {fee:'1.99'}
+  let obj = {fee:2}
   return res.json(obj);
 });
 
