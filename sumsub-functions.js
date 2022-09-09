@@ -227,11 +227,13 @@ function transformDataForExternalServices(applicantData){
   let directorsItems = qtr?.sections?.companyDirectors?.items;
   if(directorsItems && typeof directorsItems === 'object' && directorsItems !== null){
     for(let i=1;i<=directorsFieldsCount;i++){
+      let attachmentProofOfIdentity = directorsItems['director'+i+'ProofOfIdentity']?.value
+      let attachmentProofOfAddress = directorsItems['director'+i+'ProofOfAddress']?.value;
       let fullName = directorsItems['director'+i+'FullName']?.value
       let email = directorsItems['director'+i+'Email']?.value;
       let phoneNumber = directorsItems['director'+i+'PhoneNumber']?.value;
-      if(fullName || email || phoneNumber){
-        finalObj.companyDirectors.push({fullName, email, phoneNumber})
+      if(attachmentProofOfIdentity || attachmentProofOfAddress || fullName || email || phoneNumber){
+        finalObj.companyDirectors.push({attachmentProofOfIdentity, attachmentProofOfAddress, fullName, email, phoneNumber})
       }      
     }
   }
