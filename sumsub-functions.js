@@ -243,6 +243,7 @@ function transformDataForExternalServices(applicantData){
   if(beneficiariesItems && typeof beneficiariesItems === 'object' && beneficiariesItems !== null){
     for(let i=1;i<=beneficiariesFieldsCount;i++){
       let attachment = beneficiariesItems['beneficiary'+i+'GovId']?.value
+      let attachmentProofOfAddress = beneficiariesItems['beneficiary'+i+'ProofOfAddress']?.value;
       let email = beneficiariesItems['beneficiary'+i+'Email']?.value;
       let fullName = beneficiariesItems['beneficiary'+i+'FullName']?.value;
       try {
@@ -258,8 +259,8 @@ function transformDataForExternalServices(applicantData){
       let birthday = beneficiariesItems['beneficiary'+i+'DOB']?.value;
       let percentageOwned = beneficiariesItems['beneficiary'+i+'Percent']?.value;
       let ssn = beneficiariesItems['beneficiary'+i+'SSN']?.value;
-      if(attachment || email || firstName || lastName || birthday || percentageOwned || ssn){
-        finalObj.companyBeneficiaries.push({index:i, attachment, email, firstName, lastName, birthday, percentageOwned, ssn})
+      if(attachment || attachmentProofOfAddress || email || firstName || lastName || birthday || percentageOwned || ssn){
+        finalObj.companyBeneficiaries.push({index:i, attachment, attachmentProofOfAddress, email, firstName, lastName, birthday, percentageOwned, ssn})
       }      
     }
   }
