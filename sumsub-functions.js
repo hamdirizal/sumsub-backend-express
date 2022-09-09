@@ -270,10 +270,8 @@ function transformDataForExternalServices(applicantData){
   //Required documents
   finalObj.proofAddressCompany_docId = qtr?.sections?.requiredDocuments?.items?.proofAddressCompany?.value;
   finalObj.incorporationCertificate_docId = qtr?.sections?.requiredDocuments?.items?.incorporationCertificate?.value;
-  finalObj.certifiedIdentityDirectors_docId = qtr?.sections?.requiredDocuments?.items?.certifiedIdentityDirectors?.value;
   finalObj.articlesAssociationCopy_docId = qtr?.sections?.requiredDocuments?.items?.articlesAssociationCopy?.value;
   finalObj.boardApprovedListAuthUsers_docId = qtr?.sections?.requiredDocuments?.items?.boardApprovedListAuthUsers?.value;
-  finalObj.certifiedResidencyDirectors_docId = qtr?.sections?.requiredDocuments?.items?.certifiedResidencyDirectors?.value;
 
   return finalObj;
 }
