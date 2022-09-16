@@ -23,3 +23,10 @@ Content-Type: application/json
     "reviewAnswer":"GREEN"
     }
 }
+
+
+### Hamdi Dummy Endpoint
+GET http://localhost:3001/hamditest2
+
+### Hamdi Dummy Endpoint
+GET http://localhost:3001/hamditestresetquestionnaire

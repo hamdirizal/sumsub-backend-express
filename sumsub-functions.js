@@ -294,5 +294,65 @@ function transformDataForExternalServices(applicantData){
   return config;
 }
 
+function getOneApplicantData(applicantId){
+  var method = 'get';
+  var url = `/resources/applicants/${applicantId}/one`;
 
-module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData, transformDataForExternalServices, getDocument, alpha3toAlpha2}
+  var headers = {
+    'Accept': 'application/json',
+    'X-App-Token': process.env.SUMSUB_APP_TOKEN
+  };
+
+  config.method = method;
+  config.url = url;
+  config.headers = headers;
+  config.data = null
+
+  return config;
+}
+
+function testChangingTopLevelData(){
+  var method = 'patch';
+  var url = `/resources/applicants`;
+
+  var headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'X-App-Token': process.env.SUMSUB_APP_TOKEN
+  };
+
+  var requestBody = {
+    id: '63208b8aa22f950001b40c78',
+    questionnaires:[{"id":"poplar_questionnaire_3","sections":{"companyDirectors":{"items":{"director3ProofOfAddress":{},"director4FullName":{},"director8Email":{},"director5ProofOfIdentity":{},"director2Email":{},"director6FullName":{},"director8ProofOfAddress":{},"director2ProofOfIdentity":{},"director1Email":{"value":"director1@email.com"},"director7Email":{},"director8FullName":{},"director2ProofOfAddress":{},"director4ProofOfAddress":{},"director8PhoneNumber":{},"director10ProofOfAddress":{},"director8ProofOfIdentity":{},"director9ProofOfAddress":{},"director9PhoneNumber":{},"director3PhoneNumber":{},"director7ProofOfIdentity":{},"director1ProofOfAddress":{"value":"154382083"},"director5ProofOfAddress":{},"director3FullName":{},"director2PhoneNumber":{},"director1ProofOfIdentity":{"value":"148926926"},"director10FullName":{},"director6ProofOfIdentity":{},"director5FullName":{},"director7PhoneNumber":{},"director5Email":{},"director7FullName":{},"director1FullName":{"value":"First Director"},"director1PhoneNumber":{"value":"1111111111"},"director9FullName":{},"director9ProofOfIdentity":{},"director4Email":{},"director6ProofOfAddress":{},"director10PhoneNumber":{},"director4PhoneNumber":{},"director9Email":{},"director3ProofOfIdentity":{},"director10ProofOfIdentity":{},"director7ProofOfAddress":{},"director5PhoneNumber":{},"director10Email":{},"director4ProofOfIdentity":{},"director2FullName":{},"director6PhoneNumber":{},"director3Email":{},"director6Email":{}}},"requiredDocuments":{"items":{"proofAddressCompany":{"value":"1582938064"},"incorporationCertificate":{"value":"954122136"},"chkImportantInformation":{"value":"true"},"articlesAssociationCopy":{"value":"1542926828"},"chkCompanyNotAsShellBank":{"value":"true"},"boardApprovedListAuthUsers":{"value":"711010714"},"chkCompanyNotInSanctionedCountries":{"value":"true"},"chkCorrectInfo":{"value":"Hamdi Rizal"},"chkAcceptToc":{"value":"true"}}},"companyBeneficiaries":{"items":{"beneficiary1GovId":{},"beneficiary6Email":{},"beneficiary5SSN":{},"beneficiary9FullName":{},"beneficiary9SSN":{},"beneficiary3ProofOfAddress":{},"beneficiary7GovId":{},"beneficiary3DOB":{},"beneficiary10Percent":{},"beneficiary8ProofOfAddress":{},"beneficiary7Email":{},"beneficiary2SSN":{},"beneficiary6GovId":{},"beneficiary7DOB":{},"beneficiary4ProofOfAddress":{},"beneficiary10SSN":{},"beneficiary4Percent":{},"beneficiary6Percent":{},"beneficiary6SSN":{},"beneficiary8Percent":{},"beneficiary5GovId":{},"beneficiary2GovId":{},"beneficiary2FullName":{},"beneficiary1Email":{"value":"benef1@email.com"},"beneficiary4DOB":{},"beneficiary6FullName":{},"beneficiary2Percent":{},"beneficiary4FullName":{},"beneficiary3SSN":{},"beneficiary8GovId":{},"beneficiary9ProofOfAddress":{},"beneficiary8DOB":{},"beneficiary3Email":{},"beneficiary4GovId":{},"beneficiary7SSN":{},"beneficiary8FullName":{},"beneficiary5ProofOfAddress":{},"beneficiary9Email":{},"beneficiary9GovId":{},"beneficiary4Email":{},"beneficiary1DOB":{"value":"1988-10-01"},"beneficiary10Email":{},"beneficiary3GovId":{},"beneficiary10DOB":{},"beneficiary1ProofOfAddress":{"value":"600033069"},"beneficiary5DOB":{},"beneficiary9DOB":{},"beneficiary8SSN":{},"beneficiary1FullName":{"value":"Benef One"},"beneficiary5Percent":{},"beneficiary3FullName":{},"beneficiary4SSN":{},"beneficiary7Percent":{},"beneficiary9Percent":{},"beneficiary6ProofOfAddress":{},"beneficiary10GovId":{},"beneficiary2DOB":{},"beneficiary7FullName":{},"beneficiary1Percent":{"value":"70"},"beneficiary10FullName":{},"beneficiary10ProofOfAddress":{},"beneficiary2ProofOfAddress":{},"beneficiary7ProofOfAddress":{},"beneficiary3Percent":{},"beneficiary1SSN":{"value":"111111112"},"beneficiary2Email":{},"beneficiary8Email":{},"beneficiary5FullName":{},"beneficiary6DOB":{},"beneficiary5Email":{}}},"companyInformation":{"items":{"city":{"value":"My city"},"postalCode":{"value":"99999"},"legalNameOfEntity":{"value":"HamdiStagingTest"},"physicalLocationAddress":{},"jurisdictionOfTaxResidency":{},"websiteAddress":{},"description":{"value":"Hamdi staging test description"},"countryOfIncorporation":{"value":"US"},"taxIdentificationNumber":{},"stateOfIncorporation":{"value":"AK"},"registeredAddress":{"value":"my address"},"doingBusinessAs":{"value":"HStagingTest"},"entityAuthority":{},"entitysFirmType":{"value":"LLC"}}},"extra":{"items":{"referrer":{},"isAuthorizedSigner":{"value":"yes"},"poplarPointOfContact":{}}}}}]
+  }
+
+
+
+  config.method = method;
+  config.url = url;
+  config.headers = headers;
+  config.data = JSON.stringify(requestBody);
+
+  return config;
+}
+
+
+function testResettingQuestionnaire() {
+  console.log('resetting a questionnaire')
+  var method = 'post';
+  var url = '/resources/applicants/63208b8aa22f950001b40c78/resetStep/QUESTIONNAIRE'
+  var headers = {
+      'Accept': 'application/json',
+      'X-App-Token': process.env.SUMSUB_APP_TOKEN
+  };
+
+  config.method = method;
+  config.url = url;
+  config.headers = headers;
+  config.data = null
+
+  return config;
+}
+
+
+module.exports = {createApplicant, getApplicantDataByExternalId, createAccessToken, getApplicantReviewStatus, getApplicantSubmissionData, transformDataForExternalServices, getDocument, alpha3toAlpha2, getOneApplicantData, testChangingTopLevelData, testResettingQuestionnaire}

@@ -11,7 +11,10 @@ const {
   getApplicantDataByExternalId, 
   createAccessToken, 
   getApplicantReviewStatus, 
-  getApplicantSubmissionData 
+  getApplicantSubmissionData, 
+  getOneApplicantData,
+  testChangingTopLevelData,
+  testResettingQuestionnaire
 } = require('./sumsub-functions')
 const app = express()
 const port = process.env.PORT || 3001
@@ -254,6 +257,38 @@ app.all('/business-verification/sumsub-resetX', (req,res)=>{
   let obj = {success:true}
   return res.json(obj);
 });
+
+app.get('/hamditest1', async function(req, res){
+  try {
+    //Creating the access token
+    const res1 = await axios.request(getOneApplicantData('63208b8aa22f950001b40c78'))
+    return res.json({returned: res1.data})    
+  } catch (error1) {
+    return res.status(500).send({ error: error1 })
+  }
+});
+
+
+app.get('/hamditest2', async function(req, res){
+  try {
+    //Creating the access token
+    const res1 = await axios.request(testChangingTopLevelData())
+    return res.json({returned: res1.data})    
+  } catch (error1) {
+    return res.status(500).send({ error: error1 })
+  }
+});
+
+app.get('/hamditestresetquestionnaire', async function(req, res){
+  try {
+    //Creating the access token
+    const res1 = await axios.request(testResettingQuestionnaire())
+    return res.json({returned: res1.data})    
+  } catch (error1) {
+    return res.status(500).send({ error: error1 })
+  }
+});
+
 
 
 
