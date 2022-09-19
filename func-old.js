@@ -148,8 +148,6 @@ transformDataForExternalServices(
     qtr?.sections?.requiredDocuments?.items?.proofAddressCompany?.value;
   finalObj.incorporationCertificate_docId =
     qtr?.sections?.requiredDocuments?.items?.incorporationCertificate?.value;
-  finalObj.certifiedIdentityDirectors_docId =
-    qtr?.sections?.requiredDocuments?.items?.certifiedIdentityDirectors?.value;
   finalObj.articlesAssociationCopy_docId =
     qtr?.sections?.requiredDocuments?.items?.articlesAssociationCopy?.value;
   finalObj.boardApprovedListAuthUsers_docId =
