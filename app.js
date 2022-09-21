@@ -172,7 +172,7 @@ app.all('/account', (req,res)=>{
 });
 
 app.all('/account/setup-state', (req,res)=>{
-  let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":0,"connect_accounts":true,"details":[]}
+  let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":1,"connect_accounts":true,"details":[]}
   // let obj = {"business_verification":"NONE","submit_documentation":0,"deposit_status":0,"details":[],"connect_accounts":false}
   return res.json(obj);
 });
@@ -244,7 +244,10 @@ app.all('/account/funds', (req,res)=>{
 
 
 app.all('/account/transactions', (req,res)=>{
-  let obj = [{"amount":"10","unit_count":null,"status_id":8,"asset_name":"USDC","scheduled_on":"2022-08-18T18:00:00.000Z","created_at":"2022-08-17T13:04:12.124Z","type":"Deposit","status_name":"Processing Transfer"}]
+  let obj = [
+    {"amount":"10","unit_count":null,"status_id":8,"asset_name":"USDC","scheduled_on":"2022-08-18T18:00:00.000Z","created_at":"2022-08-16T13:04:12.124Z","type":"Deposit","status_name":"Processing Transfer"},
+    {"amount":"10","unit_count":null,"status_id":8,"asset_name":"USDC","scheduled_on":"2022-08-20T18:00:00.000Z","created_at":"2022-08-16T13:04:12.124Z","type":"Deposit","status_name":"Processing Transfer"}
+  ]
   return res.json(obj);
 });
 
