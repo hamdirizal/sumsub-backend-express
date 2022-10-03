@@ -36,6 +36,8 @@ const { post__account__deposits } = require('./post__account__deposits')
 const { all__account__profile } = require('./all__account__profile')
 const { all__account__linktoken } = require('./all__account__linktoken')
 const { all__account__products__balances } = require('./all__account__products__balances')
+const { all__pools__all } = require('./all__pools__all')
+const { all__pools__templates } = require('./all__pools__template')
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -190,6 +192,8 @@ app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
 app.all('/user/profile', all__user__profile);
 app.all('/user/settings', all__user__settings);
+app.all('/pools/all', all__pools__all);
+app.all('/pools/templates', all__pools__templates);
 
 app.all('/old-setup-state', (req,res)=>{
   //"business_verification":0, //PENDING = 0, DO_LATER = 1, DONE = 2,

@@ -1,0 +1,5 @@
+const all__pools__all = (req,res)=>{
+  const obj = [{"id":182,"pool_name":"Inventory","pool_description":"Earn money on the idle cash you have waiting on an invetory order to supply your business.","pool_template_id":2,"created_at":"2022-10-01T12:47:56.734Z","balance":0,"status_id":"1","automated_transfer":0,"apy":0},{"id":181,"pool_name":"New Poplar Pool","pool_description":"Default Poplar Pool","pool_template_id":0,"created_at":"2022-09-29T12:56:40.499Z","balance":0,"status_id":"1","automated_transfer":0,"apy":0},{"id":176,"pool_name":"Tax witholding Test","pool_description":"Quarterly or yearly it doesn’t matter. Earn money inbetween tax period with your idle tax money.","pool_template_id":0,"created_at":"2022-09-28T08:08:40.484Z","balance":0,"status_id":"1","automated_transfer":0,"apy":0}]
+  return obj;
+}
+module.exports = {all__pools__all}
