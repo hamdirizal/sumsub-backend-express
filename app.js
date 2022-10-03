@@ -16,12 +16,13 @@ const {
   testChangingTopLevelData,
   testResettingQuestionnaire
 } = require('./sumsub-functions')
-const { account__deposits__products } = require('./account__deposits__products')
-const { account__transactions } = require('./account__transactions')
-const { user__settings } = require('./user__settings')
-const { account } = require('./account')
-const { account__funds } = require('./account__funds')
-const { account__withdraw__balance } = require('./account__withdraw__balance')
+const { all__account__deposits__products } = require('./all__account__deposits__products')
+const { all__account__transactions } = require('./all__account__transactions')
+const { all__user__settings } = require('./all__user__settings')
+const { all__account } = require('./all__account')
+const { all__account__funds } = require('./all__account__funds')
+const { all__account__withdraw__balance } = require('./all__account__withdraw__balance')
+const { all__account__withdraw } = require('./all__account__withdraw')
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -166,9 +167,9 @@ app.all('/auth/login-sync', (req,res)=>{
   return res.json(obj);
 });
 
-app.all('/user/settings', user__settings);
+app.all('/user/settings', all__user__settings);
 
-app.all('/account', account);
+app.all('/account', all__account);
 
 app.all('/account/setup-state', (req,res)=>{
   let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":1,"connect_accounts":true,"details":[]}
@@ -223,15 +224,11 @@ app.all('/account/deposits/automat', (req,res)=>{
 });
 
 
-app.all('/account/withdraw', (req,res)=>{
-  let obj = {success:true, id:1, amount: 300, scheduled_on: "2022-12-12 00:00:00", asset_transfer_id: '', status_id: 0, disbursable: 0, unit_count: 0, price_per_unit: 0, asset_name: 'USDC', client: 0, is_automat: false, protocol: 0, address: '', settled_at: "2022-12-12 00:00:00", created_at: "2022-12-12 00:00:00", completed_at: "2022-12-12 00:00:00", }
-  return res.json(obj);
-});
-
-app.all('/account/withdraw/balance', account__withdraw__balance);
-app.all('/account/funds', account__funds);
-app.all('/account/transactions', account__transactions);
-app.all('/account/deposits/products', account__deposits__products);
+app.all('/account/withdraw', all__account__withdraw);
+app.all('/account/withdraw/balance', all__account__withdraw__balance);
+app.all('/account/funds', all__account__funds);
+app.all('/account/transactions', all__account__transactions);
+app.all('/account/deposits/products', all__account__deposits__products);
 
 app.all('/old-setup-state', (req,res)=>{
   //"business_verification":0, //PENDING = 0, DO_LATER = 1, DONE = 2,
