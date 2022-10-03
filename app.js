@@ -185,6 +185,7 @@ app.all('/account/deposits/ach-push-details', all__account__deposits__achpushdet
 app.all('/account/deposits/wire-details', all__account__deposits__wiredetails);
 app.all('/account/deposits/fee', all__account__deposits__fee);
 app.all('/account/deposits/automat', all__account__deposits__automat);
+app.all('/account/withdraw/automat', all__account__deposits__automat);
 app.all('/account/withdraw', all__account__withdraw);
 app.all('/account/withdraw/balance', all__account__withdraw__balance);
 app.all('/account/funds', all__account__funds);
