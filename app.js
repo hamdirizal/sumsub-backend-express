@@ -16,9 +16,15 @@ const {
   testChangingTopLevelData,
   testResettingQuestionnaire
 } = require('./sumsub-functions')
+const { all__auth__onboardinginfo } = require('./all__auth__onboardinginfo')
+const { all__account__setupstate } = require('./all__account__setupstate')
+const { all__user__profile } = require('./all__user__profile')
+const { all__account__idlecash } = require('./all__account__idlecash')
 const { all__account__deposits__products } = require('./all__account__deposits__products')
+const { all__auth__loginsync } = require('./all__auth__loginsync')
 const { all__account__deposits__wiredetails } = require('./all__account__deposits__wiredetails')
 const { all__account__transactions } = require('./all__account__transactions')
+const { all__account__deposits__achpushdetails } = require('./all__account__deposits__achpushdetails')
 const { all__user__settings } = require('./all__user__settings')
 const { all__account } = require('./all__account')
 const { all__account__funds } = require('./all__account__funds')
@@ -26,6 +32,10 @@ const { all__account__withdraw__balance } = require('./all__account__withdraw__b
 const { all__account__withdraw } = require('./all__account__withdraw')
 const { all__account__deposits__automat } = require('./all__account__deposits__automat')
 const { all__account__deposits__fee } = require('./all__account__deposits__fee')
+const { post__account__deposits } = require('./post__account__deposits')
+const { all__account__profile } = require('./all__account__profile')
+const { all__account__linktoken } = require('./all__account__linktoken')
+const { all__account__products__balances } = require('./all__account__products__balances')
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -107,14 +117,6 @@ async function routeSumsubCreateAccessToken(req, res){
   }
 }
 
-
-
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -160,59 +162,25 @@ app.get('/get-document', async function(req, res){
 
 
 //Routes tobe used on production
-app.all('/auth/onboarding-info', (req,res)=>{
-  let obj = {"user_id":23,"first_name":"Hamdi","last_name":"Rizal","phone":"19706477017","email":"hamdirizal@gmail.com","auth0_user_id":"auth0|62f351030861016987eece88","company_name":"HamdiPoplarDevtTest","created_at":"2022-08-10T06:33:55.992Z","id":18,"business_verification":0,"enable_2fa":false,"status_id":0,"deposit_status":0}
-  return res.json(obj);
-});
 
-app.all('/auth/login-sync', (req,res)=>{
-  let obj = {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlhZNExjeklEZ2JaOWxGUTJkcUZxSSJ9.eyJpc3MiOiJodHRwczovL2Rldi1tc2FsMDR6ZS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjJmMzUxMDMwODYxMDE2OTg3ZWVjZTg4IiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9hcGkiLCJodHRwczovL2Rldi1tc2FsMDR6ZS51cy5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNjYwNzIxMTk1LCJleHAiOjE2NjA4MDc1OTUsImF6cCI6IkUxWjR3U1VycWZZSDc2NElGaFV1SnZGb1NqVW1Ja25zIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.mAG7gC_uARP4Z92X-KS8x9sZKeBLy2v06hdb2tAdyq2NeMvGLaBppRpIA1rC1UKCQg61De-CXJWmLfyqcCI74qIe9S1e3hG2SAAgF1gC6Mx76SFvOawe_UnNIRUDIC_3LauKaMZNY5-7CiGEr8WWYf3Fy28GajWeExaNGNsVrZfVrIRM61OM9c8giN5q8vlC_p-BEcoVVZ4v5YcXUlFoQM3O0T-J7nXESTVU14WmTeeRdndHGLBN7fJ8q8ed7JYPOg0p0Tzd3xyRiGnMq9y_Hs7BZsN4iK_WynBwT2I4Q1tr-Pz6EPtjtQ9t_9q_hlMc_AUJHCCPA-3NLyYcSVl4eA","status_id":0}
-  return res.json(obj);
-});
 
-app.all('/user/settings', all__user__settings);
 
+
+
+
+
+app.post('/account/deposits', post__account__deposits);
+
+app.all('/auth/login-sync', all__auth__loginsync);
+app.all('/auth/onboarding-info', all__auth__onboardinginfo);
+app.all('/account/setup-state', all__account__setupstate);
 app.all('/account', all__account);
-
-app.all('/account/setup-state', (req,res)=>{
-  let obj = {"business_verification":"VERIFIED","submit_documentation":0,"deposit_status":1,"connect_accounts":true,"details":[]}
-  // let obj = {"business_verification":"NONE","submit_documentation":0,"deposit_status":0,"details":[],"connect_accounts":false}
-  return res.json(obj);
-});
-app.all('/account/products/balances', (req,res)=>{
-  let obj = [{"id":1,"product_name":"Aave","asset_name":"USDC","network":"Avalanche","protocol":"aave-avax","yield":"2.73","type":0,"status_id":1,"image_url":"https://poplar-staging.s3.amazonaws.com/products/Aave.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2ZBVY4PYUWWVWQXF%2F20220919%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220919T074508Z&X-Amz-Expires=60&X-Amz-Signature=719eeba4e0c47db82f7c1bfebdac38cbf5d6bbe36e6ff011832a8411fb246ecf&X-Amz-SignedHeaders=host","created_at":"2022-08-30T21:02:51.150Z","type_name":"Fiat Backed","current_balance":0,"available_to_withdrawal":0,"earnings":0},{"id":2,"product_name":"Aave","asset_name":"USDC","network":"Ethereum","protocol":"aave","yield":"2.73","type":0,"status_id":1,"image_url":"https://poplar-staging.s3.amazonaws.com/products/Aave.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2ZBVY4PYUWWVWQXF%2F20220919%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220919T074508Z&X-Amz-Expires=60&X-Amz-Signature=719eeba4e0c47db82f7c1bfebdac38cbf5d6bbe36e6ff011832a8411fb246ecf&X-Amz-SignedHeaders=host","created_at":"2022-08-30T21:02:51.150Z","type_name":"Fiat Backed","current_balance":0,"available_to_withdrawal":0,"earnings":0},{"id":3,"product_name":"Compound","asset_name":"USDC","network":"Compound","protocol":"compound","yield":"6.08","type":0,"status_id":1,"image_url":"https://poplar-staging.s3.amazonaws.com/products/Compound.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2ZBVY4PYUWWVWQXF%2F20220919%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220919T074508Z&X-Amz-Expires=60&X-Amz-Signature=6bfff842bb9ef8fc191e176a6d7300bfc925ba7e1ee234e2f7e54ab724602aba&X-Amz-SignedHeaders=host","created_at":"2022-08-30T21:02:51.150Z","type_name":"Fiat Backed","current_balance":0,"available_to_withdrawal":0,"earnings":0},{"id":4,"product_name":"Alkemy","asset_name":"USDC","network":"Alkemy","protocol":"alkemy","yield":"4.22","type":0,"status_id":1,"image_url":"https://poplar-staging.s3.amazonaws.com/products/Alkemi.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2ZBVY4PYUWWVWQXF%2F20220919%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220919T074508Z&X-Amz-Expires=60&X-Amz-Signature=93704f60d89dd4dcb6c5d39b4d04b46266cfa3c0d1267982bac18c5cf4e9046a&X-Amz-SignedHeaders=host","created_at":"2022-08-30T21:02:51.150Z","type_name":"Fiat Backed","current_balance":0,"available_to_withdrawal":0,"earnings":0}];
-  return res.json(obj);
-});
-
-app.all('/user/profile', (req,res)=>{
-  let obj = {"user_id":23,"first_name":"Hamdi","last_name":"Rizal","phone":"19706477017","email":"hamdirizal@gmail.com","auth0_user_id":"auth0|62f351030861016987eece88","company_name":"HamdiPoplarDevtTest","created_at":"2022-08-10T06:33:55.992Z","id":18,"business_verification":0,"enable_2fa":false,"status_id":0,"deposit_status":0}
-  return res.json(obj);
-});
-
-app.all('/account/profile', (req,res)=>{
-  let obj = {"first_name":"Hamdi","last_name":"Rizal","phone":"+19706477017","email":"hamdirizal@gmail.com","is_authorized_signer":"Yes"}
-  return res.json(obj);
-});
-app.all('/account/link-token', (req,res)=>{
-  let obj = {"expiration":"2022-08-17T20:22:20Z","link_token":"link-sandbox-76703012-fc5e-4ed0-9519-21a14671d2ad","request_id":"G3V33VNNDOHXd0z"}
-  return res.json(obj);
-});
-
-app.all('/account/idle-cash', (req,res)=>{
-  let obj = {"accounts":[{"plaid_token_id":182,"poplar_account_id":null,"bank_name":"Chase","accounts":[{"account_id":"k6aVQJXz9gtAqXpKzPxwFkP8mn6j7eCznMeP7","balances":{"available":200,"current":210,"iso_currency_code":"USD","limit":null,"unofficial_currency_code":null,"idle_cash":20},"mask":"1111","name":"Plaid Saving","official_name":"Plaid Silver Standard 0.1% Interest Saving","subtype":"savings","type":"depository"}]},{"plaid_token_id":183,"poplar_account_id":null,"bank_name":"Chase","accounts":[{"account_id":"4WGrZA4L1BIgJMV1ay6KCPJmXANNLztngD3Dw","balances":{"available":100,"current":110,"iso_currency_code":"USD","limit":null,"unofficial_currency_code":null,"idle_cash":10},"mask":"0000","name":"Plaid Checking","official_name":"Plaid Gold Standard 0% Interest Checking","subtype":"checking","type":"depository"},{"account_id":"NZgRPLdKJmi3gNQ9r8LJCld7XvAAR4fnre7em","balances":{"available":200,"current":210,"iso_currency_code":"USD","limit":null,"unofficial_currency_code":null,"idle_cash":20},"mask":"1111","name":"Plaid Saving","official_name":"Plaid Silver Standard 0.1% Interest Saving","subtype":"savings","type":"depository"}]},{"plaid_token_id":184,"poplar_account_id":null,"bank_name":"Chase","accounts":[{"account_id":"8KPRLZwxXqSerRjD5n8Zh8DmoG3onecK4VgPQ","balances":{"available":100,"current":110,"iso_currency_code":"USD","limit":null,"unofficial_currency_code":null,"idle_cash":10},"mask":"0000","name":"Plaid Checking","official_name":"Plaid Gold Standard 0% Interest Checking","subtype":"checking","type":"depository"},{"account_id":"EeWrx3NzXvCnGKd6MVmJhldpz9MzWwi9vPraZ","balances":{"available":200,"current":210,"iso_currency_code":"USD","limit":null,"unofficial_currency_code":null,"idle_cash":20},"mask":"1111","name":"Plaid Saving","official_name":"Plaid Silver Standard 0.1% Interest Saving","subtype":"savings","type":"depository"}]},{"plaid_token_id":187,"poplar_account_id":null,"bank_name":"Chase","accounts":[{"account_id":"Jj9DjwNL6acb1AxRX7n8s4DQqoVKqDfowxLy9","balances":{"available":100,"current":110,"iso_currency_code":"USD","limit":null,"unofficial_currency_code":null,"idle_cash":10},"mask":"0000","name":"Plaid Checking","official_name":"Plaid Gold Standard 0% Interest Checking","subtype":"checking","type":"depository"},{"account_id":"kNkWNMQEPbunLoAbzVJGH5e3LKJRLeUzAabje","balances":{"available":200,"current":210,"iso_currency_code":"USD","limit":null,"unofficial_currency_code":null,"idle_cash":20},"mask":"1111","name":"Plaid Saving","official_name":"Plaid Silver Standard 0.1% Interest Saving","subtype":"savings","type":"depository"}]}],"idleCashBalance":110,"accountsCount":7}
-  return res.json(obj);
-});
-
-app.post('/account/deposits', (req,res)=>{
-  let obj = {success:true, message:"Mock data: The deposit is created."}
-  return res.json(obj);
-});
-app.all('/account/deposits/ach-push-details', (req,res)=>{
-  let obj = {foo:'bar'}
-  return res.json(obj);
-});
+app.all('/account/products/balances', all__account__products__balances);
+app.all('/account/profile', all__account__profile);
+app.all('/account/link-token', all__account__linktoken);
+app.all('/account/idle-cash', all__account__idlecash);
+app.all('/account/deposits/ach-push-details', all__account__deposits__achpushdetails);
 app.all('/account/deposits/wire-details', all__account__deposits__wiredetails);
-
 app.all('/account/deposits/fee', all__account__deposits__fee);
 app.all('/account/deposits/automat', all__account__deposits__automat);
 app.all('/account/withdraw', all__account__withdraw);
@@ -220,6 +188,8 @@ app.all('/account/withdraw/balance', all__account__withdraw__balance);
 app.all('/account/funds', all__account__funds);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
+app.all('/user/profile', all__user__profile);
+app.all('/user/settings', all__user__settings);
 
 app.all('/old-setup-state', (req,res)=>{
   //"business_verification":0, //PENDING = 0, DO_LATER = 1, DONE = 2,
