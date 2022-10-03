@@ -17,12 +17,15 @@ const {
   testResettingQuestionnaire
 } = require('./sumsub-functions')
 const { all__account__deposits__products } = require('./all__account__deposits__products')
+const { all__account__deposits__wiredetails } = require('./all__account__deposits__wiredetails')
 const { all__account__transactions } = require('./all__account__transactions')
 const { all__user__settings } = require('./all__user__settings')
 const { all__account } = require('./all__account')
 const { all__account__funds } = require('./all__account__funds')
 const { all__account__withdraw__balance } = require('./all__account__withdraw__balance')
 const { all__account__withdraw } = require('./all__account__withdraw')
+const { all__account__deposits__automat } = require('./all__account__deposits__automat')
+const { all__account__deposits__fee } = require('./all__account__deposits__fee')
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -208,22 +211,10 @@ app.all('/account/deposits/ach-push-details', (req,res)=>{
   let obj = {foo:'bar'}
   return res.json(obj);
 });
-app.all('/account/deposits/wire-details', (req,res)=>{
-  let obj = {foo:'bar'}
-  return res.json(obj);
-});
+app.all('/account/deposits/wire-details', all__account__deposits__wiredetails);
 
-app.all('/account/deposits/fee', (req,res)=>{
-  let obj = {fee:2}
-  return res.json(obj);
-});
-
-app.all('/account/deposits/automat', (req,res)=>{
-  let obj = { success: true, message: 'Mock data: The automated deposit is created' };
-  return res.json(obj);
-});
-
-
+app.all('/account/deposits/fee', all__account__deposits__fee);
+app.all('/account/deposits/automat', all__account__deposits__automat);
 app.all('/account/withdraw', all__account__withdraw);
 app.all('/account/withdraw/balance', all__account__withdraw__balance);
 app.all('/account/funds', all__account__funds);
