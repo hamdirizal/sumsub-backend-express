@@ -1,5 +1,5 @@
-const all__account__funds = (req,res)=>{
+const all__account__funds__balance = (req,res)=>{
   let obj = [{"id":146,"amount":"10.000098","date":"2022-10-08T15:35:40.763Z","user_id":686,"pool_id":185,"protocol":"aave-avax","type":0,"type_name":"Deposit"},{"id":148,"amount":"20.000099","date":"2022-10-08T15:36:40.789Z","user_id":686,"pool_id":185,"protocol":"aave-avax","type":0,"type_name":"Deposit"},{"id":149,"amount":"40.000117","date":"2022-10-08T17:38:41.767Z","user_id":686,"pool_id":185,"protocol":"aave-avax","type":0,"type_name":"Deposit"},{"id":159,"amount":"39.000343","date":"2022-10-09T13:37:50.197Z","user_id":686,"pool_id":185,"protocol":"aave-avax","type":1,"type_name":"Withdrawal"},{"id":160,"amount":"38.000344","date":"2022-10-09T13:40:50.257Z","user_id":686,"pool_id":185,"protocol":"aave-avax","type":1,"type_name":"Withdrawal"},{"id":163,"amount":"37.991106","date":"2022-10-12T13:06:50.296Z","user_id":686,"pool_id":185,"protocol":"aave-avax","type":1,"type_name":"Withdrawal"},{"id":164,"amount":"37.990294","date":"2022-10-13T06:50:50.431Z","user_id":686,"pool_id":185,"protocol":"aave-avax","type":1,"type_name":"Withdrawal"}];
   return res.json(obj);
 }
-module.exports = {all__account__funds}
+module.exports = {all__account__funds__balance}

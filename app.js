@@ -28,6 +28,7 @@ const { all__account__deposits__achpushdetails } = require('./all__account__depo
 const { all__user__settings } = require('./all__user__settings')
 const { all__account } = require('./all__account')
 const { all__account__funds } = require('./all__account__funds')
+const { all__account__funds__balance } = require('./all__account__funds__balance')
 const { all__account__withdraw__balance } = require('./all__account__withdraw__balance')
 const { all__account__withdraw } = require('./all__account__withdraw')
 const { all__account__deposits__automat } = require('./all__account__deposits__automat')
@@ -38,6 +39,8 @@ const { all__account__linktoken } = require('./all__account__linktoken')
 const { all__account__products__balances } = require('./all__account__products__balances')
 const { all__pools__all } = require('./all__pools__all')
 const { all__pools__templates } = require('./all__pools__template')
+const { all__pools__id } = require('./all__pools__id')
+const { post__report__pool } = require('./post__report__pool')
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -172,6 +175,7 @@ app.get('/get-document', async function(req, res){
 
 
 app.post('/account/deposits', post__account__deposits);
+app.post('/report/pool', post__report__pool);
 
 app.all('/auth/login-sync', all__auth__loginsync);
 app.all('/auth/onboarding-info', all__auth__onboardinginfo);
@@ -188,6 +192,7 @@ app.all('/account/deposits/automat', all__account__deposits__automat);
 app.all('/account/withdraw/automat', all__account__deposits__automat);
 app.all('/account/withdraw', all__account__withdraw);
 app.all('/account/withdraw/balance', all__account__withdraw__balance);
+app.all('/account/funds?fund_type=BALANCE*', all__account__funds__balance);
 app.all('/account/funds', all__account__funds);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
@@ -195,6 +200,7 @@ app.all('/user/profile', all__user__profile);
 app.all('/user/settings', all__user__settings);
 app.all('/pools/all', all__pools__all);
 app.all('/pools/templates', all__pools__templates);
+app.all('/pools/*', all__pools__id);
 
 app.all('/old-setup-state', (req,res)=>{
   //"business_verification":0, //PENDING = 0, DO_LATER = 1, DONE = 2,

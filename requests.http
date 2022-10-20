@@ -26,7 +26,7 @@ Content-Type: application/json
 
 
 ### Hamdi Dummy Endpoint
-GET http://localhost:3001/hamditest2
+GET http://localhost:3001/account/funds?fund_type=BALANCE
 
 ### Hamdi Dummy Endpoint
 GET http://localhost:3001/hamditestresetquestionnaire
