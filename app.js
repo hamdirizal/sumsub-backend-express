@@ -21,6 +21,7 @@ const { all__account__setupstate } = require('./all__account__setupstate')
 const { all__user__profile } = require('./all__user__profile')
 const { all__account__idlecash } = require('./all__account__idlecash')
 const { all__account__deposits__products } = require('./all__account__deposits__products')
+const { all__business_verification__agreement } = require('./all__business_verification__agreement')
 const { all__auth__loginsync } = require('./all__auth__loginsync')
 const { all__account__deposits__wiredetails } = require('./all__account__deposits__wiredetails')
 const { all__account__transactions } = require('./all__account__transactions')
@@ -28,6 +29,7 @@ const { all__account__deposits__achpushdetails } = require('./all__account__depo
 const { all__user__settings } = require('./all__user__settings')
 const { all__account } = require('./all__account')
 const { all__account__funds } = require('./all__account__funds')
+const { all__account__agreementpreviews } = require('./all__account__agreementpreviews')
 const { all__account__funds__balance } = require('./all__account__funds__balance')
 const { all__account__withdraw__balance } = require('./all__account__withdraw__balance')
 const { all__account__withdraw } = require('./all__account__withdraw')
@@ -182,6 +184,7 @@ app.all('/auth/onboarding-info', all__auth__onboardinginfo);
 app.all('/account/setup-state', all__account__setupstate);
 app.all('/account', all__account);
 app.all('/account/products/balances', all__account__products__balances);
+app.all('/account/agreement-previews', all__account__agreementpreviews);
 app.all('/account/profile', all__account__profile);
 app.all('/account/link-token', all__account__linktoken);
 app.all('/account/idle-cash', all__account__idlecash);
@@ -196,6 +199,7 @@ app.all('/account/funds?fund_type=BALANCE*', all__account__funds__balance);
 app.all('/account/funds', all__account__funds);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
+app.all('/business-verification/agreement', all__business_verification__agreement);
 app.all('/user/profile', all__user__profile);
 app.all('/user/settings', all__user__settings);
 app.all('/pools/all', all__pools__all);
@@ -244,6 +248,11 @@ app.get('/hamditestresetquestionnaire', async function(req, res){
   } catch (error1) {
     return res.status(500).send({ error: error1 })
   }
+});
+
+app.all('/hamdidummytest', async function(req, res){
+  let obj = {success:true}
+  return res.json(obj);
 });
 
 

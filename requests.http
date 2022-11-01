@@ -30,3 +30,8 @@ GET http://localhost:3001/account/funds?fund_type=BALANCE
 
 ### Hamdi Dummy Endpoint
 GET http://localhost:3001/hamditestresetquestionnaire
+
+
+
+### Hamdi Dummy Endpoint
+POST business-verification/sumsub-token

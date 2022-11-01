@@ -147,7 +147,7 @@ function getApplicantReviewStatus(applicantId){
  * @param {String} externalUserId The user id which will be used to pick the applicant
  */
  function createAccessToken (externalUserId) {
-  const ttlInSecs = 60 * 15; //Lifespan of a token in seconds. 15 minutes
+  const ttlInSecs = 60 * 30; //Lifespan of a token in seconds. 15 minutes
   console.log("Creating an access token for initializng SDK...");
 
   var method = 'post';
@@ -162,6 +162,7 @@ function getApplicantReviewStatus(applicantId){
   config.url = url;
   config.headers = headers;
   config.data = null;
+  console.log(externalUserId);
 
   return config;
 }
