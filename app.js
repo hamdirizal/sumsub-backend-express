@@ -200,6 +200,7 @@ app.all('/account/funds', all__account__funds);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
 app.all('/business-verification/agreement', all__business_verification__agreement);
+app.all('/business-verification/sumsub-completed', all__business_verification__agreement);
 app.all('/user/profile', all__user__profile);
 app.all('/user/settings', all__user__settings);
 app.all('/pools/all', all__pools__all);
