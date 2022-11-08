@@ -199,7 +199,7 @@ app.all('/account/funds?fund_type=BALANCE*', all__account__funds__balance);
 app.all('/account/funds', all__account__funds);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
-app.all('/business-verification/agreement', (req, res)=>{
+app.all('/business-verification/approve', (req, res)=>{
   setTimeout(()=>{
     let obj = {success:true, message:'Action success'}; return res.json(obj);
     // return res.status(400).json({"message": "Error: Lorem ipsum dolor sit amet", "error": "Unauthorized"})
