@@ -114,7 +114,7 @@ async function routeSumsubWebhookApplicantReviewed(req, res){
 async function routeSumsubCreateAccessToken(req, res){
   //Send error if externalUserId not provided
   if(!req || !req.body || !req.body.externalUserId) return res.status(500).send({ error: 'Please provide externalUserId' });
-
+  // return res.json({token:'helloworld123'});
   try {
     //Creating the access token
     const res1 = await axios.request(createAccessToken(req.body.externalUserId))
@@ -199,7 +199,13 @@ app.all('/account/funds?fund_type=BALANCE*', all__account__funds__balance);
 app.all('/account/funds', all__account__funds);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
-app.all('/business-verification/agreement', all__business_verification__agreement);
+app.all('/business-verification/agreement', (req, res)=>{
+  setTimeout(()=>{
+    let obj = {success:true, message:'Action success'}; return res.json(obj);
+    // return res.status(400).json({"message": "Error: Lorem ipsum dolor sit amet", "error": "Unauthorized"})
+    
+  },3000);
+});
 app.all('/business-verification/sumsub-completed', all__business_verification__agreement);
 app.all('/user/profile', all__user__profile);
 app.all('/user/settings', all__user__settings);
