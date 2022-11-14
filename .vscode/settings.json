@@ -1,4 +1,5 @@
 {
+  "workbench.colorTheme": "Red",
   "workbench.colorCustomizations": {
     "tab.activeBackground": "#770000",
     "tab.activeForeground": "#ffffff",
