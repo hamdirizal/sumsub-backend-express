@@ -43,6 +43,7 @@ const { all__pools__all } = require('./all__pools__all')
 const { all__pools__templates } = require('./all__pools__template')
 const { all__pools__id } = require('./all__pools__id')
 const { post__report__pool } = require('./post__report__pool')
+const { get: getApiNotificationsTransfers } = require('./src/notifications/transfers')
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -173,7 +174,7 @@ app.get('/get-document', async function(req, res){
 
 
 
-
+app.get('/notifications/transfers', getApiNotificationsTransfers);
 
 
 app.post('/account/deposits', post__account__deposits);
@@ -201,10 +202,10 @@ app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
 app.all('/business-verification/approve', (req, res)=>{
   setTimeout(()=>{
-    let obj = {success:true, message:'Action success'}; return res.json(obj);
-    // return res.status(400).json({"message": "Error: Lorem ipsum dolor sit amet", "error": "Unauthorized"})
+    // let obj = {success:true, message:'Action success'}; return res.json(obj);
+    return res.status(400).json({"message": "Error: Lorem ipsum dolor sit amet", "error": "Unauthorized"})
     
-  },3000);
+  },1000);
 });
 app.all('/business-verification/sumsub-completed', all__business_verification__agreement);
 app.all('/user/profile', all__user__profile);
