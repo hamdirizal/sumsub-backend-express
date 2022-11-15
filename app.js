@@ -44,6 +44,9 @@ const { all__pools__templates } = require('./all__pools__template')
 const { all__pools__id } = require('./all__pools__id')
 const { post__report__pool } = require('./post__report__pool')
 const { get: getApiNotificationsTransfers } = require('./src/notifications/transfers')
+const { post: postPools } = require('./src/pools')
+const { get: getPools999 } = require('./src/pools/999')
+const { get: getPoolsTemplates } = require('./src/pools/templates')
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -173,8 +176,16 @@ app.get('/get-document', async function(req, res){
 
 
 
+//Routes
+//========================================
 
 app.get('/notifications/transfers', getApiNotificationsTransfers);
+app.post('/pools', postPools);
+app.all('/pools/all', all__pools__all);
+app.get('/pools/templates', getPoolsTemplates);
+app.get('/pools/*', getPools999);
+
+//========================================
 
 
 app.post('/account/deposits', post__account__deposits);
@@ -210,9 +221,6 @@ app.all('/business-verification/approve', (req, res)=>{
 app.all('/business-verification/sumsub-completed', all__business_verification__agreement);
 app.all('/user/profile', all__user__profile);
 app.all('/user/settings', all__user__settings);
-app.all('/pools/all', all__pools__all);
-app.all('/pools/templates', all__pools__templates);
-app.all('/pools/*', all__pools__id);
 
 app.all('/old-setup-state', (req,res)=>{
   //"business_verification":0, //PENDING = 0, DO_LATER = 1, DONE = 2,
