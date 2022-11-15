@@ -43,10 +43,13 @@ const { all__pools__all } = require('./all__pools__all')
 const { all__pools__templates } = require('./all__pools__template')
 const { all__pools__id } = require('./all__pools__id')
 const { post__report__pool } = require('./post__report__pool')
+
 const { get: getApiNotificationsTransfers } = require('./src/notifications/transfers')
 const { post: postPools } = require('./src/pools')
 const { get: getPools999 } = require('./src/pools/999')
 const { get: getPoolsTemplates } = require('./src/pools/templates')
+const { get: getReportUserBalances } = require('./src/report/user/balances')
+
 const app = express()
 const port = process.env.PORT || 3001
 const DOWNLOAD_FOLDER_NAME = "_downloads"
@@ -184,6 +187,7 @@ app.post('/pools', postPools);
 app.all('/pools/all', all__pools__all);
 app.get('/pools/templates', getPoolsTemplates);
 app.get('/pools/*', getPools999);
+app.get('/report/user/balances', getReportUserBalances);
 
 //========================================
 
