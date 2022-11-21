@@ -3,6 +3,6 @@ const all__pools__all = (req,res)=>{
   setTimeout(() => {
     return res.json(obj);
     // return res.sendStatus(400)
-  }, 1000);
+  }, 1);
 }
 module.exports = {all__pools__all}

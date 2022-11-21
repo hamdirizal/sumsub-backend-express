@@ -49,6 +49,9 @@ const { post: postPools } = require('./src/pools')
 const { get: getPools999 } = require('./src/pools/999')
 const { get: getPoolsTemplates } = require('./src/pools/templates')
 const { get: getReportUserBalances } = require('./src/report/user/balances')
+const { get: getAllAutomations } = require('./src/all-automations')
+const { get: getAccountAvailableBalance } = require('./src/account/available-balance')
+const { get: getAccountDepositsAutomated } = require('./src/account/deposits/automated')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -188,6 +191,7 @@ app.all('/pools/all', all__pools__all);
 app.get('/pools/templates', getPoolsTemplates);
 app.get('/pools/*', getPools999);
 app.get('/report/user/balances', getReportUserBalances);
+app.get('/all-automations', getAllAutomations);
 
 //========================================
 
@@ -197,6 +201,7 @@ app.post('/report/pool', post__report__pool);
 
 app.all('/auth/login-sync', all__auth__loginsync);
 app.all('/auth/onboarding-info', all__auth__onboardinginfo);
+app.get('/account/available-balance', getAccountAvailableBalance);
 app.all('/account/setup-state', all__account__setupstate);
 app.all('/account', all__account);
 app.all('/account/products/balances', all__account__products__balances);
@@ -207,9 +212,11 @@ app.all('/account/idle-cash', all__account__idlecash);
 app.all('/account/deposits/ach-push-details', all__account__deposits__achpushdetails);
 app.all('/account/deposits/wire-details', all__account__deposits__wiredetails);
 app.all('/account/deposits/fee', all__account__deposits__fee);
+app.get('/account/deposits/automated', getAccountDepositsAutomated);
 app.all('/account/deposits/automat', all__account__deposits__automat);
 app.all('/account/withdraw/automat', all__account__deposits__automat);
 app.all('/account/withdraw', all__account__withdraw);
+app.get('/account/withdraw/available-balance', getAccountAvailableBalance);
 app.all('/account/withdraw/balance', all__account__withdraw__balance);
 app.all('/account/funds?fund_type=BALANCE*', all__account__funds__balance);
 app.all('/account/funds', all__account__funds);
@@ -220,7 +227,7 @@ app.all('/business-verification/approve', (req, res)=>{
     // let obj = {success:true, message:'Action success'}; return res.json(obj);
     return res.status(400).json({"message": "Error: Lorem ipsum dolor sit amet", "error": "Unauthorized"})
     
-  },1000);
+  },1);
 });
 app.all('/business-verification/sumsub-completed', all__business_verification__agreement);
 app.all('/user/profile', all__user__profile);

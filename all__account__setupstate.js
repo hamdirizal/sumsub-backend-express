@@ -1,7 +1,7 @@
 const all__account__setupstate = (req,res)=>{
   let obj = {
     "business_verification":"VERIFIED",
-    "connect_accounts":false,
+    "connect_accounts":true,
     "submit_documentation":0,"details":[],"sumsub_state":"completed","pt_state":"opened","deposit_status":1
   }
   return res.json(obj);
