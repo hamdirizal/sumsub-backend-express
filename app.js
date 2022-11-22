@@ -49,6 +49,7 @@ const { post: postPools } = require('./src/pools')
 const { get: getPools999 } = require('./src/pools/999')
 const { get: getPoolsTemplates } = require('./src/pools/templates')
 const { get: getReportUserBalances } = require('./src/report/user/balances')
+const { post: postReport } = require('./src/report')
 const { get: getAllAutomations } = require('./src/all-automations')
 const { get: getAccountAvailableBalance } = require('./src/account/available-balance')
 const { get: getAccountDepositsAutomated } = require('./src/account/deposits/automated')
@@ -191,6 +192,7 @@ app.all('/pools/all', all__pools__all);
 app.get('/pools/templates', getPoolsTemplates);
 app.get('/pools/*', getPools999);
 app.get('/report/user/balances', getReportUserBalances);
+app.post('/report',postReport);
 app.get('/all-automations', getAllAutomations);
 
 //========================================
