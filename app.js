@@ -53,6 +53,8 @@ const { post: postReport } = require('./src/report')
 const { get: getAllAutomations } = require('./src/all-automations')
 const { get: getAccountAvailableBalance } = require('./src/account/available-balance')
 const { get: getAccountDepositsAutomated } = require('./src/account/deposits/automated')
+const { get: getAccount } = require('./src/account')
+const { get: getAccountIdleCash } = require('./src/account/idle-cash')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -186,31 +188,17 @@ app.get('/get-document', async function(req, res){
 //Routes
 //========================================
 
-app.get('/notifications/transfers', getApiNotificationsTransfers);
-app.post('/pools', postPools);
-app.all('/pools/all', all__pools__all);
-app.get('/pools/templates', getPoolsTemplates);
-app.get('/pools/*', getPools999);
-app.get('/report/user/balances', getReportUserBalances);
-app.post('/report',postReport);
-app.get('/all-automations', getAllAutomations);
-
-//========================================
-
-
-app.post('/account/deposits', post__account__deposits);
-app.post('/report/pool', post__report__pool);
-
 app.all('/auth/login-sync', all__auth__loginsync);
 app.all('/auth/onboarding-info', all__auth__onboardinginfo);
+app.post('/account/deposits', post__account__deposits);
 app.get('/account/available-balance', getAccountAvailableBalance);
 app.all('/account/setup-state', all__account__setupstate);
-app.all('/account', all__account);
+app.get('/account', getAccount);
 app.all('/account/products/balances', all__account__products__balances);
 app.all('/account/agreement-previews', all__account__agreementpreviews);
 app.all('/account/profile', all__account__profile);
 app.all('/account/link-token', all__account__linktoken);
-app.all('/account/idle-cash', all__account__idlecash);
+app.get('/account/idle-cash', getAccountIdleCash);
 app.all('/account/deposits/ach-push-details', all__account__deposits__achpushdetails);
 app.all('/account/deposits/wire-details', all__account__deposits__wiredetails);
 app.all('/account/deposits/fee', all__account__deposits__fee);
@@ -224,6 +212,22 @@ app.all('/account/funds?fund_type=BALANCE*', all__account__funds__balance);
 app.all('/account/funds', all__account__funds);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
+app.get('/all-automations', getAllAutomations);
+app.get('/notifications/transfers', getApiNotificationsTransfers);
+app.post('/pools', postPools);
+app.all('/pools/all', all__pools__all);
+app.get('/pools/templates', getPoolsTemplates);
+app.get('/pools/*', getPools999);
+app.get('/report/user/balances', getReportUserBalances);
+app.post('/report',postReport);
+
+//========================================
+
+
+
+
+
+
 app.all('/business-verification/approve', (req, res)=>{
   setTimeout(()=>{
     // let obj = {success:true, message:'Action success'}; return res.json(obj);
@@ -232,6 +236,7 @@ app.all('/business-verification/approve', (req, res)=>{
   },1);
 });
 app.all('/business-verification/sumsub-completed', all__business_verification__agreement);
+app.post('/report/pool', post__report__pool);
 app.all('/user/profile', all__user__profile);
 app.all('/user/settings', all__user__settings);
 
