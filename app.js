@@ -55,6 +55,7 @@ const { get: getAccountAvailableBalance } = require('./src/account/available-bal
 const { get: getAccountDepositsAutomated } = require('./src/account/deposits/automated')
 const { get: getAccount } = require('./src/account')
 const { get: getAccountIdleCash } = require('./src/account/idle-cash')
+const { get: getAccountAutomatedTransactionsUpcoming } = require('./src/account/automated-transactions/upcoming')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -196,6 +197,7 @@ app.all('/account/setup-state', all__account__setupstate);
 app.get('/account', getAccount);
 app.all('/account/products/balances', all__account__products__balances);
 app.all('/account/agreement-previews', all__account__agreementpreviews);
+app.get('/account/automated-transactions/upcoming', getAccountAutomatedTransactionsUpcoming);
 app.all('/account/profile', all__account__profile);
 app.all('/account/link-token', all__account__linktoken);
 app.get('/account/idle-cash', getAccountIdleCash);
