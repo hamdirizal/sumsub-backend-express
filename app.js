@@ -56,6 +56,7 @@ const { get: getAccountDepositsAutomated } = require('./src/account/deposits/aut
 const { get: getAccount } = require('./src/account')
 const { get: getAccountIdleCash } = require('./src/account/idle-cash')
 const { get: getAccountAutomatedTransactionsUpcoming } = require('./src/account/automated-transactions/upcoming')
+const { get: getGetReportData } = require('./src/get-report-data')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -222,6 +223,8 @@ app.get('/pools/templates', getPoolsTemplates);
 app.get('/pools/*', getPools999);
 app.get('/report/user/balances', getReportUserBalances);
 app.post('/report',postReport);
+
+app.get('/get-report-data',getGetReportData);
 
 //========================================
 
