@@ -50,6 +50,7 @@ const { get: getPools999 } = require('./src/pools/999')
 const { get: getPoolsTemplates } = require('./src/pools/templates')
 const { get: getReportUserBalances } = require('./src/report/user/balances')
 const { post: postReport } = require('./src/report')
+const { get: getReport999 } = require('./src/report/999')
 const { get: getAllAutomations } = require('./src/all-automations')
 const { get: getAccountAvailableBalance } = require('./src/account/available-balance')
 const { get: getAccountDepositsAutomated } = require('./src/account/deposits/automated')
@@ -57,6 +58,9 @@ const { get: getAccount } = require('./src/account')
 const { get: getAccountIdleCash } = require('./src/account/idle-cash')
 const { get: getAccountAutomatedTransactionsUpcoming } = require('./src/account/automated-transactions/upcoming')
 const { get: getGetReportData } = require('./src/get-report-data')
+const { post: postVerificationCodesSend } = require('./src/verification-codes/send')
+const { post: postAccountDepositsAutomatedPause } = require('./src/account/deposits/automated/pause')
+const { deleting: deletingAccountDepositsAutomated } = require('./src/account/deposits/automated')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -192,10 +196,12 @@ app.get('/get-document', async function(req, res){
 
 app.all('/auth/login-sync', all__auth__loginsync);
 app.all('/auth/onboarding-info', all__auth__onboardinginfo);
+app.get('/account', getAccount);
 app.post('/account/deposits', post__account__deposits);
+app.post('/account/deposits/automated/pause', postAccountDepositsAutomatedPause);
+app.delete('/account/deposits/automated/*', deletingAccountDepositsAutomated);
 app.get('/account/available-balance', getAccountAvailableBalance);
 app.all('/account/setup-state', all__account__setupstate);
-app.get('/account', getAccount);
 app.all('/account/products/balances', all__account__products__balances);
 app.all('/account/agreement-previews', all__account__agreementpreviews);
 app.get('/account/automated-transactions/upcoming', getAccountAutomatedTransactionsUpcoming);
@@ -223,8 +229,8 @@ app.get('/pools/templates', getPoolsTemplates);
 app.get('/pools/*', getPools999);
 app.get('/report/user/balances', getReportUserBalances);
 app.post('/report',postReport);
-
-app.get('/get-report-data',getGetReportData);
+app.get('/report/*',getReport999);
+app.post('/verification-codes/send',postVerificationCodesSend);
 
 //========================================
 

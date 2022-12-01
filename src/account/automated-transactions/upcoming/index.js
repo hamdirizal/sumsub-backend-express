@@ -1,6 +1,6 @@
 const get = (req,res)=>{
   let obj = {
-    "count": "1",
+    "count": "1000",
     "response": [
       {
         "id": 105, //BOOKMARK
@@ -89,7 +89,7 @@ const get = (req,res)=>{
   }
   setTimeout(()=>{
     return res.json(obj)
-  },1000);
+  },2000);
 }
 
 module.exports = {get}
