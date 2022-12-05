@@ -216,6 +216,7 @@ app.all('/account/deposits/fee', all__account__deposits__fee);
 app.get('/account/deposits/automated', getAccountDepositsAutomated);
 app.all('/account/deposits/automat', all__account__deposits__automat);
 app.get('/account/pt-balance', getAccountPTBalance);
+app.post('/account/withdraw/automated/pause', postAccountDepositsAutomatedPause);
 app.get('/account/withdraw/automated', getAccountWithdrawAutomated);
 app.all('/account/withdraw/automat', all__account__deposits__automat);
 app.all('/account/withdraw', all__account__withdraw);
