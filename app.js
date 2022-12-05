@@ -54,7 +54,9 @@ const { get: getReport999 } = require('./src/report/999')
 const { get: getAllAutomations } = require('./src/all-automations')
 const { get: getAccountAvailableBalance } = require('./src/account/available-balance')
 const { get: getAccountDepositsAutomated } = require('./src/account/deposits/automated')
+const { get: getAccountWithdrawAutomated } = require('./src/account/withdraw/automated')
 const { get: getAccount } = require('./src/account')
+const { get: getAccountPTBalance } = require('./src/account/pt-balance')
 const { get: getAccountIdleCash } = require('./src/account/idle-cash')
 const { get: getAccountAutomatedTransactionsUpcoming } = require('./src/account/automated-transactions/upcoming')
 const { get: getGetReportData } = require('./src/get-report-data')
@@ -213,6 +215,8 @@ app.all('/account/deposits/wire-details', all__account__deposits__wiredetails);
 app.all('/account/deposits/fee', all__account__deposits__fee);
 app.get('/account/deposits/automated', getAccountDepositsAutomated);
 app.all('/account/deposits/automat', all__account__deposits__automat);
+app.get('/account/pt-balance', getAccountPTBalance);
+app.get('/account/withdraw/automated', getAccountWithdrawAutomated);
 app.all('/account/withdraw/automat', all__account__deposits__automat);
 app.all('/account/withdraw', all__account__withdraw);
 app.get('/account/withdraw/available-balance', getAccountAvailableBalance);
