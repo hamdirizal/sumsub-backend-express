@@ -54,6 +54,7 @@ const { get: getReport999 } = require('./src/report/999')
 const { get: getAllAutomations } = require('./src/all-automations')
 const { get: getAccountAvailableBalance } = require('./src/account/available-balance')
 const { get: getAccountDepositsAutomated } = require('./src/account/deposits/automated')
+const { get: getAccountEarningsFunds } = require('./src/account/earnings/funds')
 const { get: getAccountWithdrawAutomated } = require('./src/account/withdraw/automated')
 const { get: getAccount } = require('./src/account')
 const { get: getAccountPTBalance } = require('./src/account/pt-balance')
@@ -201,11 +202,13 @@ app.all('/auth/onboarding-info', all__auth__onboardinginfo);
 app.get('/account', getAccount);
 app.post('/account/deposits', post__account__deposits);
 app.post('/account/deposits/automated/pause', postAccountDepositsAutomatedPause);
+app.post('/account/deposits/automated/resume', postAccountDepositsAutomatedPause);
 app.delete('/account/deposits/automated/*', deletingAccountDepositsAutomated);
 app.get('/account/available-balance', getAccountAvailableBalance);
 app.all('/account/setup-state', all__account__setupstate);
 app.all('/account/products/balances', all__account__products__balances);
 app.all('/account/agreement-previews', all__account__agreementpreviews);
+app.get('/account/earnings/funds', getAccountEarningsFunds);
 app.get('/account/automated-transactions/upcoming', getAccountAutomatedTransactionsUpcoming);
 app.all('/account/profile', all__account__profile);
 app.all('/account/link-token', all__account__linktoken);
