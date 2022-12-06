@@ -59,6 +59,7 @@ const { get: getAccountWithdrawAutomated } = require('./src/account/withdraw/aut
 const { get: getAccount } = require('./src/account')
 const { get: getAccountPTBalance } = require('./src/account/pt-balance')
 const { get: getAccountIdleCash } = require('./src/account/idle-cash')
+const { get: getAccountTransactionsGroup } = require('./src/account/transactions-group')
 const { get: getAccountAutomatedTransactionsUpcoming } = require('./src/account/automated-transactions/upcoming')
 const { get: getGetReportData } = require('./src/get-report-data')
 const { post: postVerificationCodesSend } = require('./src/verification-codes/send')
@@ -227,6 +228,7 @@ app.get('/account/withdraw/available-balance', getAccountAvailableBalance);
 app.all('/account/withdraw/balance', all__account__withdraw__balance);
 app.all('/account/funds?fund_type=BALANCE*', all__account__funds__balance);
 app.all('/account/funds', all__account__funds);
+app.get('/account/transactions-group', getAccountTransactionsGroup);
 app.all('/account/transactions', all__account__transactions);
 app.all('/account/deposits/products', all__account__deposits__products);
 app.get('/all-automations', getAllAutomations);

@@ -89,7 +89,7 @@ const get = (req,res)=>{
   }
   setTimeout(()=>{
     return res.json(obj)
-  },2000);
+  },1);
 }
 
 module.exports = {get}

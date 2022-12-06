@@ -4,7 +4,7 @@ const post = (req,res)=>{
     return res.json(obj); 
     // return res.json({}); //Empty data
     // return res.sendStatus(400); //Failure
-  }, 5000);
+  }, 100);
 }
 
 module.exports = {post}

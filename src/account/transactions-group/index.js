@@ -1,6 +1,6 @@
 const get = (req,res)=>{
   const obj = {
-    "count": 2,
+    "count": 20,
     "transactions": [
         {
             "id": 102,
@@ -8,7 +8,8 @@ const get = (req,res)=>{
             "scheduled_on": null,
             "account_id": "JP5ByqDj3PFbqrW7kAZjhW9969bwBxi5aQnLM",
             "fee": "0",
-            "type": 0,
+            "type": "Withdrawal",
+            "is_regular": "1",
             "asset_name": "USDC",
             "user_id": 685,
             "protocol": "aave-avax",
@@ -55,14 +56,4 @@ const get = (req,res)=>{
   }, 100);
 }
 
-
-const deleting = (req,res)=>{
-  const obj = {success:true, message: "Action success."}
-
-  setTimeout(() => {    
-    // return res.json({}); //Empty data
-    return res.json(obj); 
-    // return res.sendStatus(400); //Failure
-  }, 100);
-}
-module.exports = {get, deleting}
+module.exports = {get}

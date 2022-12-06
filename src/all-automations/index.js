@@ -5,6 +5,6 @@ const get = (req,res)=>{
     // return res.json({}); //Empty data
     return res.json(obj); 
     // return res.sendStatus(400); //Failure
-  }, 1000);
+  }, 100);
 }
 module.exports = {get}
