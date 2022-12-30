@@ -3,8 +3,8 @@ const post = (req,res)=>{
   setTimeout(() => {    
     return res.json(obj); 
     // return res.json({}); //Empty data
-    // return res.sendStatus(400); //Failure
-  }, 3000);
+    // return res.status(401).json({ "statusCode": 401, "message": "Mock: Verification code check failed", "error": "Unauthorized" });
+  }, 2000);
 }
 
 module.exports = {post}
