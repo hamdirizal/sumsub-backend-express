@@ -63,6 +63,7 @@ const { get: getAccountTransactionsGroup } = require('./src/account/transactions
 const { get: getAccountAutomatedTransactionsUpcoming } = require('./src/account/automated-transactions/upcoming')
 const { get: getGetReportData } = require('./src/get-report-data')
 const { post: postVerificationCodesSend } = require('./src/verification-codes/send')
+const { post: postVerificationCodesCheck } = require('./src/verification-codes/check')
 const { post: postAccountDepositsAutomatedPause } = require('./src/account/deposits/automated/pause')
 const { deleting: deletingAccountDepositsAutomated } = require('./src/account/deposits/automated')
 
@@ -240,6 +241,7 @@ app.get('/pools/*', getPools999);
 app.get('/report/user/balances', getReportUserBalances);
 app.post('/report',postReport);
 app.get('/report/*',getReport999);
+app.post('/verification-codes/check',postVerificationCodesCheck);
 app.post('/verification-codes/send',postVerificationCodesSend);
 
 //========================================
