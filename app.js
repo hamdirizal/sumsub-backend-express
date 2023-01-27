@@ -40,6 +40,7 @@ const { all__account__profile } = require('./all__account__profile')
 const { all__account__linktoken } = require('./all__account__linktoken')
 const { all__account__products__balances } = require('./all__account__products__balances')
 const { all__pools__all } = require('./all__pools__all')
+const { get__pools__all__v2 } = require('./get__pools__all__v2')
 const { all__pools__templates } = require('./all__pools__template')
 const { all__pools__id } = require('./all__pools__id')
 const { post__report__pool } = require('./post__report__pool')
@@ -236,8 +237,10 @@ app.get('/all-automations', getAllAutomations);
 app.get('/notifications/transfers', getApiNotificationsTransfers);
 app.post('/pools', postPools);
 app.all('/pools/all', all__pools__all);
+app.all('/pools/all/v2', get__pools__all__v2);
 app.get('/pools/templates', getPoolsTemplates);
 app.get('/pools/*', getPools999);
+app.get('/products', all__account__deposits__products);
 app.get('/report/user/balances', getReportUserBalances);
 app.post('/report',postReport);
 app.get('/report/*',getReport999);

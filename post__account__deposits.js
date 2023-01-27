@@ -1,5 +1,9 @@
 const post__account__deposits = (req,res)=>{
-  let obj = {success:true, message:"Mock data: The deposit is created."}
+  let obj = {
+    "pool_id": 355,
+    "success": true,
+    "message": "Mock data: The deposit is created."
+  }
   setTimeout(() => {    
     return res.json(obj); 
     // return res.json({}); //Empty data

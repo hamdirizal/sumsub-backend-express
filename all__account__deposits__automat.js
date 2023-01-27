@@ -1,5 +1,9 @@
 const all__account__deposits__automat = (req,res)=>{
-  let obj = { success: true, message: 'Mock data: The automated deposit is created' };
+  let obj = {
+    "pool_id": 355,
+    "success": true,
+    "message": "Mock data: The deposit is created."
+  }
   return res.json(obj);
 }
 
